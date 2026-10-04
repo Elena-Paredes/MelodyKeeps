@@ -23,4 +23,4 @@ MelodyKeeps está en construcción y estamos puliendo cada detalle antes de abri
 
 ---
 
-¿Eres desarrollador y quieres verlo por dentro? Mira la [guía para desarrolladores](DEVELOPMENT.md).
+<img width="918" height="976" alt="image" src="https://github.com/user-attachments/assets/a921e814-d968-4ca1-8a78-62d40767ff10" />
