@@ -1,0 +1,28 @@
+{
+  "designId": "purple-feathers",
+  "side": "front",
+  "status": "IMPLEMENTATION_READY",
+  "implementationReady": true,
+  "canvas": { "width": 1000, "height": 1500 },
+  "elements": [
+    { "id": "thread-01", "type": "svg", "src": "assets/svg/thread-01.svg", "x": 0, "y": 0, "width": 1000, "height": 1500, "rotationDeg": 0, "mirrorX": false, "mirrorY": false, "opacity": 1, "zIndex": 1 },
+    { "id": "thread-02", "type": "svg", "src": "assets/svg/thread-02-heart-top.svg", "x": 0, "y": 0, "width": 1000, "height": 1500, "rotationDeg": 0, "mirrorX": false, "mirrorY": false, "opacity": 1, "zIndex": 1 },
+    { "id": "thread-03", "type": "svg", "src": "assets/svg/thread-03-left.svg", "x": 0, "y": 0, "width": 1000, "height": 1500, "rotationDeg": 0, "mirrorX": false, "mirrorY": false, "opacity": 1, "zIndex": 1 },
+    { "id": "thread-04", "type": "svg", "src": "assets/svg/thread-04-heart-right.svg", "x": 0, "y": 0, "width": 1000, "height": 1500, "rotationDeg": 0, "mirrorX": false, "mirrorY": false, "opacity": 1, "zIndex": 1 },
+    { "id": "thread-05", "type": "svg", "src": "assets/svg/thread-05-bottom-pink.svg", "x": 0, "y": 0, "width": 1000, "height": 1500, "rotationDeg": 0, "mirrorX": false, "mirrorY": false, "opacity": 1, "zIndex": 1 },
+    { "id": "thread-06", "type": "svg", "src": "assets/svg/thread-06-bottom-blue.svg", "x": 0, "y": 0, "width": 1000, "height": 1500, "rotationDeg": 0, "mirrorX": false, "mirrorY": false, "opacity": 1, "zIndex": 1 },
+    { "id": "F01_TOP_LEFT", "type": "png", "src": "assets/png/feather-03.png", "x": 90, "y": 18, "width": 76, "height": 176, "rotationDeg": -24, "zIndex": 2 },
+    { "id": "F02_LEFT_UPPER", "type": "png", "src": "assets/png/feather-09.png", "x": 42, "y": 350, "width": 105, "height": 104, "rotationDeg": -38, "zIndex": 2 },
+    { "id": "F03_LEFT_MIDDLE", "type": "png", "src": "assets/png/feather-01.png", "x": 46, "y": 585, "width": 108, "height": 296, "rotationDeg": 8, "zIndex": 2 },
+    { "id": "F04_LEFT_LOWER_SMALL", "type": "png", "src": "assets/png/feather-11.png", "x": 44, "y": 1060, "width": 61, "height": 100, "rotationDeg": 36, "zIndex": 2 },
+    { "id": "F05_BOTTOM_LEFT", "type": "png", "src": "assets/png/feather-08.png", "x": 254, "y": 1454, "width": 129, "height": 46, "rotationDeg": 22, "zIndex": 2 },
+    { "id": "F06_TOP_RIGHT_SMALL", "type": "png", "src": "assets/png/feather-12.png", "x": 710, "y": 166, "width": 70, "height": 38, "rotationDeg": 26, "zIndex": 2 },
+    { "id": "F07_RIGHT_UPPER", "type": "png", "src": "assets/png/feather-10.png", "x": 850, "y": 272, "width": 70, "height": 101, "rotationDeg": 24, "zIndex": 2 },
+    { "id": "F08_RIGHT_UPPER_SMALL", "type": "png", "src": "assets/png/feather-12.png", "x": 874, "y": 376, "width": 40, "height": 57, "rotationDeg": 24, "zIndex": 2 },
+    { "id": "F09_RIGHT_MIDDLE_LARGE", "type": "png", "src": "assets/png/feather-02.png", "x": 852, "y": 444, "width": 126, "height": 216, "rotationDeg": -25, "zIndex": 2 },
+    { "id": "F10_RIGHT_MIDDLE_SMALL", "type": "png", "src": "assets/png/feather-07.png", "x": 836, "y": 684, "width": 72, "height": 108, "rotationDeg": 24, "zIndex": 2 },
+    { "id": "F11_RIGHT_LOWER", "type": "png", "src": "assets/png/feather-05.png", "x": 884, "y": 1018, "width": 74, "height": 174, "rotationDeg": 18, "zIndex": 2 },
+    { "id": "F12_BOTTOM_CENTER_RIGHT", "type": "png", "src": "assets/png/feather-08.png", "x": 666, "y": 1453, "width": 82, "height": 47, "rotationDeg": -32, "zIndex": 2 },
+    { "id": "F13_BOTTOM_RIGHT_LARGE", "type": "png", "src": "assets/png/feather-04.png", "x": 878, "y": 1200, "width": 112, "height": 292, "rotationDeg": 17, "zIndex": 2 }
+  ]
+}

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1500" fill="none">
+
+  <path d="M-24 255 C42 206 95 160 145 120
+           C165 104 184 85 188 64
+           C191 45 181 32 165 35
+           C147 38 137 57 139 77
+           C141 101 160 118 188 137
+           C216 114 235 96 239 73
+           C243 51 232 37 215 38
+           C197 39 188 55 188 75
+           C188 105 211 132 252 156
+           C325 199 385 191 452 139"
+        stroke="#E987E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".78"/>
+</svg>

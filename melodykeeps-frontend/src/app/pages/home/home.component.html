@@ -1,0 +1,176 @@
+<main class="min-h-screen bg-gradient-to-br from-blush via-lavender to-peach px-4 py-10">
+  <div class="max-w-xl mx-auto flex flex-col gap-6">
+    <div class="text-center mb-2">
+      <h1 class="text-2xl font-bold bg-gradient-to-r from-accent to-violet bg-clip-text text-transparent">
+        Crea tu diseño
+      </h1>
+      <p class="text-sm text-plum/60 mt-1">Convierte tu canción favorita en un recuerdo físico</p>
+    </div>
+
+    <!-- 1. Seleccionar canción -->
+    <section class="rounded-3xl bg-white/80 backdrop-blur-sm shadow-lg shadow-violet/10 p-6">
+      <h2 class="font-semibold text-plum mb-3">1. Selecciona tu canción</h2>
+
+      <div class="grid grid-cols-2 gap-2 max-h-64 overflow-y-auto">
+        @for (song of supportedSongs(); track song.id) {
+          <button
+            type="button"
+            (click)="selectSupportedSong(song)"
+            class="flex flex-col items-start gap-1 rounded-xl px-3 py-2 text-left border-2 transition text-sm"
+            [class]="selectedSongId() === song.id ? 'border-accent bg-peach/40' : 'border-transparent bg-babyblue/20'"
+          >
+            <span class="font-semibold text-plum text-xs">{{ song.title }}</span>
+            <span class="text-plum/60 text-xs">{{ song.artist }}</span>
+          </button>
+        }
+      </div>
+    </section>
+
+    <!-- 2. Foto propia -->
+    <section class="rounded-3xl bg-white/80 backdrop-blur-sm shadow-lg shadow-violet/10 p-6">
+      <h2 class="font-semibold text-plum mb-3">2. ¿Quieres poner tu propia foto?</h2>
+
+      <div class="flex gap-2">
+        <button
+          type="button"
+          (click)="usesOwnPhoto.set(false)"
+          class="flex-1 rounded-xl py-2 text-sm font-medium transition"
+          [class.bg-gradient-to-r]="!usesOwnPhoto()"
+          [class.from-accent]="!usesOwnPhoto()"
+          [class.to-violet]="!usesOwnPhoto()"
+          [class.text-white]="!usesOwnPhoto()"
+          [class.bg-babyblue]="usesOwnPhoto()"
+          [class.text-plum]="usesOwnPhoto()"
+        >
+          Usar portada del álbum
+        </button>
+        <button
+          type="button"
+          (click)="usesOwnPhoto.set(true)"
+          class="flex-1 rounded-xl py-2 text-sm font-medium transition"
+          [class.bg-gradient-to-r]="usesOwnPhoto()"
+          [class.from-accent]="usesOwnPhoto()"
+          [class.to-violet]="usesOwnPhoto()"
+          [class.text-white]="usesOwnPhoto()"
+          [class.bg-babyblue]="!usesOwnPhoto()"
+          [class.text-plum]="!usesOwnPhoto()"
+        >
+          Subir mi foto
+        </button>
+      </div>
+
+      @if (usesOwnPhoto()) {
+        <label class="mt-4 flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-violet/30 bg-babyblue/20 py-8 cursor-pointer hover:bg-babyblue/30 transition">
+          @if (photoPreviewUrl()) {
+            <img [src]="photoPreviewUrl()" class="h-20 w-20 rounded-xl object-cover shadow-md" />
+          } @else {
+            <span class="text-2xl">📷</span>
+          }
+          <span class="text-sm text-plum/60">Toca para elegir una imagen</span>
+          <input type="file" accept="image/*" class="hidden" (change)="onPhotoSelected($event)" />
+        </label>
+      }
+    </section>
+
+    <!-- 3. Producto -->
+    <section class="rounded-3xl bg-white/80 backdrop-blur-sm shadow-lg shadow-violet/10 p-6">
+      <h2 class="font-semibold text-plum mb-3">3. Elige tu producto</h2>
+
+      <div class="grid grid-cols-3 gap-3">
+        @for (product of products; track product.id) {
+          <button
+            type="button"
+            (click)="selectProduct(product.id)"
+            class="flex flex-col items-center gap-1 rounded-2xl py-4 border-2 transition"
+            [class]="selectedProduct() === product.id ? 'border-accent bg-peach/40' : 'border-transparent bg-babyblue/20'"
+          >
+            <span class="text-2xl">{{ product.icon }}</span>
+            <span class="text-sm font-medium text-plum">{{ product.label }}</span>
+            <span class="text-xs text-plum/50">{{ product.size }}</span>
+          </button>
+        }
+      </div>
+    </section>
+
+    @if (createError()) {
+      <p class="text-sm text-red-500 text-center">{{ createError() }}</p>
+    }
+
+    <!-- 4. Diseño del reproductor -->
+    @if (playerDesign(); as design) {
+      <section class="rounded-3xl bg-white/80 backdrop-blur-sm shadow-lg shadow-violet/10 p-6">
+        <h2 class="font-semibold text-plum mb-3">4. Elige tu diseño</h2>
+
+        <div class="grid grid-cols-2 gap-3">
+          @for (design of availableDesigns(); track design.id) {
+            <button
+              type="button"
+              (click)="selectDesign(design.id)"
+              class="flex flex-col items-start gap-1 rounded-2xl py-3 px-3 border-2 transition"
+              [class]="selectedDesignId() === design.id ? 'border-accent bg-peach/40' : 'border-transparent bg-babyblue/20'"
+            >
+              <span class="text-sm font-medium text-plum">{{ design.name }}</span>
+              <span class="text-xs text-plum/60">{{ design.description }}</span>
+            </button>
+          }
+        </div>
+      </section>
+
+      <section class="rounded-3xl bg-white/80 backdrop-blur-sm shadow-lg shadow-violet/10 p-6">
+        <h2 class="font-semibold text-plum mb-4">Vista previa del producto</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- FRONT -->
+          <div class="flex flex-col items-center">
+            <p class="text-xs text-plum/60 mb-2">FRENTE</p>
+            <div data-testid="wavekeeps-front" class="w-full max-w-sm bg-white rounded-2xl overflow-hidden shadow-lg" style="position: relative;">
+              <div style="position: absolute; inset: 0; pointer-events: none;">
+                <app-wavekeeps-renderer [design]="design" />
+              </div>
+              <div style="position: relative;">
+                <app-player-template-classic [design]="design" />
+              </div>
+            </div>
+          </div>
+
+          <!-- BACK -->
+          @if (selectedSongData(); as song) {
+            <div class="flex flex-col items-center">
+              <p class="text-xs text-plum/60 mb-2">ATRÁS</p>
+              <div class="w-full max-w-sm bg-black rounded-2xl overflow-hidden shadow-lg">
+                <app-back-placeholder
+                  [title]="song.title"
+                  [artist]="song.artist"
+                  [quote]="song.quote"
+                  [qrDataUrl]="'/assets/wavekeeps/designs/back/' + song.backDesignId + '/assets/svg/spotify-code.svg'"
+                />
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+    }
+
+    @if (previewUrl()) {
+      <section class="rounded-3xl bg-white/80 backdrop-blur-sm shadow-lg shadow-violet/10 p-6 flex flex-col items-center gap-3">
+        <h2 class="font-semibold text-plum">¡Tu diseño está listo para imprimir!</h2>
+        <img [src]="previewUrl()" class="max-w-full rounded-2xl shadow-lg print:shadow-none" />
+        <button
+          type="button"
+          (click)="onPrint()"
+          class="rounded-xl bg-gradient-to-r from-violet to-accent text-white font-semibold py-2 px-6 shadow-md hover:opacity-90 transition"
+        >
+          🖨️ Imprimir diseño
+        </button>
+      </section>
+    }
+
+    <button
+      type="button"
+      [disabled]="creating()"
+      (click)="onCreateDesign()"
+      class="rounded-xl bg-gradient-to-r from-accent to-accent-dark text-white font-semibold py-3 shadow-md shadow-accent/30 hover:opacity-90 transition disabled:opacity-50"
+    >
+      {{ creating() ? 'Creando...' : 'Crear diseño' }}
+    </button>
+  </div>
+</main>

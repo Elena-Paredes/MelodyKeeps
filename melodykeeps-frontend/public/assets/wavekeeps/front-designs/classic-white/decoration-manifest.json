@@ -1,0 +1,502 @@
+{
+  "$schema": "wavekeeps/front-decoration-manifest",
+  "version": "1.0",
+  "canonical": "wavekeeps/references/front/disenio-adelante-todos.png",
+  "referenceNativeDimensions": {
+    "widthPx": 1024,
+    "heightPx": 1536
+  },
+  "masterDimensions": {
+    "width": 1000,
+    "height": 1500
+  },
+  "scale": {
+    "referenceToMaster": 0.9765625,
+    "masterToReference": 1.024
+  },
+  "decorations": [
+    {
+      "id": "feather-top-left-01",
+      "type": "feather",
+      "source": {
+        "anchorXPx": 68,
+        "anchorYPx": 155,
+        "visibleWidthPx": 92,
+        "visibleHeightPx": 268,
+        "rotationDeg": -32
+      },
+      "master": {
+        "anchorX": 66.328125,
+        "anchorY": 151.2421875,
+        "visibleWidth": 89.6484375,
+        "visibleHeight": 261.3125,
+        "rotationDeg": -32
+      },
+      "asset": "feathers/feather-top-left-01.png",
+      "opacity": 0.7,
+      "zIndex": 5,
+      "status": "MEASURED"
+    },
+    {
+      "id": "feather-left-middle-01",
+      "type": "feather",
+      "source": {
+        "anchorXPx": 52,
+        "anchorYPx": 420,
+        "visibleWidthPx": 68,
+        "visibleHeightPx": 185,
+        "rotationDeg": -28
+      },
+      "master": {
+        "anchorX": 50.7421875,
+        "anchorY": 409.609375,
+        "visibleWidth": 66.3046875,
+        "visibleHeight": 180.390625,
+        "rotationDeg": -28
+      },
+      "asset": "feathers/feather-left-middle-01.png",
+      "opacity": 0.65,
+      "zIndex": 5,
+      "status": "MEASURED"
+    },
+    {
+      "id": "feather-bottom-left-01",
+      "type": "feather",
+      "source": {
+        "anchorXPx": 72,
+        "anchorYPx": 1330,
+        "visibleWidthPx": 102,
+        "visibleHeightPx": 280,
+        "rotationDeg": -42
+      },
+      "master": {
+        "anchorX": 70.234375,
+        "anchorY": 1297.265625,
+        "visibleWidth": 99.4609375,
+        "visibleHeight": 273.125,
+        "rotationDeg": -42
+      },
+      "asset": "feathers/feather-bottom-left-01.png",
+      "opacity": 0.65,
+      "zIndex": 5,
+      "status": "MEASURED"
+    },
+    {
+      "id": "feather-top-right-01",
+      "type": "feather",
+      "source": {
+        "anchorXPx": 935,
+        "anchorYPx": 195,
+        "visibleWidthPx": 58,
+        "visibleHeightPx": 148,
+        "rotationDeg": 28
+      },
+      "master": {
+        "anchorX": 912.234375,
+        "anchorY": 190.234375,
+        "visibleWidth": 56.5625,
+        "visibleHeight": 144.3203125,
+        "rotationDeg": 28
+      },
+      "asset": "feathers/feather-top-right-01.png",
+      "opacity": 0.7,
+      "zIndex": 5,
+      "status": "MEASURED"
+    },
+    {
+      "id": "feather-right-middle-01",
+      "type": "feather",
+      "source": {
+        "anchorXPx": 945,
+        "anchorYPx": 440,
+        "visibleWidthPx": 72,
+        "visibleHeightPx": 195,
+        "rotationDeg": 35
+      },
+      "master": {
+        "anchorX": 921.640625,
+        "anchorY": 429.140625,
+        "visibleWidth": 70.2421875,
+        "visibleHeight": 190.234375,
+        "rotationDeg": 35
+      },
+      "asset": "feathers/feather-right-middle-01.png",
+      "opacity": 0.65,
+      "zIndex": 5,
+      "status": "MEASURED"
+    },
+    {
+      "id": "feather-bottom-right-01",
+      "type": "feather",
+      "source": {
+        "anchorXPx": 930,
+        "anchorYPx": 1280,
+        "visibleWidthPx": 105,
+        "visibleHeightPx": 295,
+        "rotationDeg": 48
+      },
+      "master": {
+        "anchorX": 906.890625,
+        "anchorY": 1248.046875,
+        "visibleWidth": 102.3828125,
+        "visibleHeight": 287.890625,
+        "rotationDeg": 48
+      },
+      "asset": "feathers/feather-bottom-right-01.png",
+      "opacity": 0.65,
+      "zIndex": 5,
+      "status": "MEASURED"
+    },
+    {
+      "id": "feather-bottom-right-02",
+      "type": "feather",
+      "source": {
+        "anchorXPx": 965,
+        "anchorYPx": 1405,
+        "visibleWidthPx": 98,
+        "visibleHeightPx": 268,
+        "rotationDeg": 52
+      },
+      "master": {
+        "anchorX": 941.171875,
+        "anchorY": 1370.078125,
+        "visibleWidth": 95.6015625,
+        "visibleHeight": 261.3125,
+        "rotationDeg": 52
+      },
+      "asset": "feathers/feather-bottom-right-02.png",
+      "opacity": 0.6,
+      "zIndex": 5,
+      "status": "MEASURED"
+    },
+    {
+      "id": "flow-line-top-left",
+      "type": "flow-line",
+      "source": {
+        "anchorXPx": 30,
+        "anchorYPx": 105,
+        "visibleWidthPx": 125,
+        "visibleHeightPx": 150,
+        "rotationDeg": 0
+      },
+      "master": {
+        "anchorX": 29.296875,
+        "anchorY": 102.3828125,
+        "visibleWidth": 121.9921875,
+        "visibleHeight": 146.484375,
+        "rotationDeg": 0
+      },
+      "asset": null,
+      "svgPath": "M 30 105 Q 80 165 155 85",
+      "opacity": 0.5,
+      "zIndex": 3,
+      "status": "MEASURED"
+    },
+    {
+      "id": "flow-line-top-right",
+      "type": "flow-line",
+      "source": {
+        "anchorXPx": 870,
+        "anchorYPx": 125,
+        "visibleWidthPx": 155,
+        "visibleHeightPx": 135,
+        "rotationDeg": 0
+      },
+      "master": {
+        "anchorX": 848.671875,
+        "anchorY": 121.9921875,
+        "visibleWidth": 151.2421875,
+        "visibleHeight": 131.6796875,
+        "rotationDeg": 0
+      },
+      "asset": null,
+      "svgPath": "M 870 125 Q 940 220 1024 75",
+      "opacity": 0.5,
+      "zIndex": 3,
+      "status": "MEASURED"
+    },
+    {
+      "id": "flow-line-left",
+      "type": "flow-line",
+      "source": {
+        "anchorXPx": 25,
+        "anchorYPx": 250,
+        "visibleWidthPx": 75,
+        "visibleHeightPx": 800,
+        "rotationDeg": 0
+      },
+      "master": {
+        "anchorX": 24.3890625,
+        "anchorY": 243.6328125,
+        "visibleWidth": 73.1484375,
+        "visibleHeight": 780.5,
+        "rotationDeg": 0
+      },
+      "asset": null,
+      "svgPath": "M 25 350 Q 35 600 28 1100",
+      "opacity": 0.48,
+      "zIndex": 3,
+      "status": "MEASURED"
+    },
+    {
+      "id": "flow-line-right",
+      "type": "flow-line",
+      "source": {
+        "anchorXPx": 950,
+        "anchorYPx": 280,
+        "visibleWidthPx": 74,
+        "visibleHeightPx": 750,
+        "rotationDeg": 0
+      },
+      "master": {
+        "anchorX": 926.40625,
+        "anchorY": 272.9765625,
+        "visibleWidth": 72.1640625,
+        "visibleHeight": 731.171875,
+        "rotationDeg": 0
+      },
+      "asset": null,
+      "svgPath": "M 950 350 Q 1000 550 970 1050",
+      "opacity": 0.48,
+      "zIndex": 3,
+      "status": "MEASURED"
+    },
+    {
+      "id": "flow-line-bottom-left",
+      "type": "flow-line",
+      "source": {
+        "anchorXPx": 35,
+        "anchorYPx": 1380,
+        "visibleWidthPx": 140,
+        "visibleHeightPx": 95,
+        "rotationDeg": 0
+      },
+      "master": {
+        "anchorX": 34.1796875,
+        "anchorY": 1346.484375,
+        "visibleWidth": 136.3984375,
+        "visibleHeight": 92.6796875,
+        "rotationDeg": 0
+      },
+      "asset": null,
+      "svgPath": "M 35 1410 Q 100 1380 175 1430",
+      "opacity": 0.5,
+      "zIndex": 3,
+      "status": "MEASURED"
+    },
+    {
+      "id": "flow-line-bottom-right",
+      "type": "flow-line",
+      "source": {
+        "anchorXPx": 860,
+        "anchorYPx": 1350,
+        "visibleWidthPx": 165,
+        "visibleHeightPx": 115,
+        "rotationDeg": 0
+      },
+      "master": {
+        "anchorX": 838.671875,
+        "anchorY": 1316.1328125,
+        "visibleWidth": 160.8984375,
+        "visibleHeight": 112.109375,
+        "rotationDeg": 0
+      },
+      "asset": null,
+      "svgPath": "M 860 1380 Q 950 1420 1024 1465",
+      "opacity": 0.5,
+      "zIndex": 3,
+      "status": "MEASURED"
+    },
+    {
+      "id": "sparkle-top-left-01",
+      "type": "sparkle",
+      "source": {
+        "anchorXPx": 118,
+        "anchorYPx": 162,
+        "visibleWidthPx": 18,
+        "visibleHeightPx": 20,
+        "rotationDeg": 45
+      },
+      "master": {
+        "anchorX": 115.1171875,
+        "anchorY": 157.9453125,
+        "visibleWidth": 17.546875,
+        "visibleHeight": 19.53125,
+        "rotationDeg": 45
+      },
+      "asset": null,
+      "svgPath": "M118,152 L128,172 M128,152 L118,172 M113,162 L133,162 M118,147 L118,177",
+      "opacity": 0.6,
+      "zIndex": 4,
+      "status": "MEASURED"
+    },
+    {
+      "id": "sparkle-top-center-01",
+      "type": "sparkle",
+      "source": {
+        "anchorXPx": 512,
+        "anchorYPx": 145,
+        "visibleWidthPx": 16,
+        "visibleHeightPx": 18,
+        "rotationDeg": 20
+      },
+      "master": {
+        "anchorX": 499.3046875,
+        "anchorY": 141.4453125,
+        "visibleWidth": 15.609375,
+        "visibleHeight": 17.546875,
+        "rotationDeg": 20
+      },
+      "asset": null,
+      "svgPath": "M512,135 L520,155 M520,135 L512,155 M504,145 L520,145 M512,128 L512,162",
+      "opacity": 0.5,
+      "zIndex": 4,
+      "status": "MEASURED"
+    },
+    {
+      "id": "sparkle-top-right-01",
+      "type": "sparkle",
+      "source": {
+        "anchorXPx": 900,
+        "anchorYPx": 128,
+        "visibleWidthPx": 20,
+        "visibleHeightPx": 22,
+        "rotationDeg": -15
+      },
+      "master": {
+        "anchorX": 877.3125,
+        "anchorY": 124.84375,
+        "visibleWidth": 19.53125,
+        "visibleHeight": 21.4453125,
+        "rotationDeg": -15
+      },
+      "asset": null,
+      "svgPath": "M900,116 L912,140 M912,116 L900,140 M888,128 L912,128 M900,106 L900,150",
+      "opacity": 0.6,
+      "zIndex": 4,
+      "status": "MEASURED"
+    },
+    {
+      "id": "sparkle-left-01",
+      "type": "sparkle",
+      "source": {
+        "anchorXPx": 75,
+        "anchorYPx": 350,
+        "visibleWidthPx": 14,
+        "visibleHeightPx": 16,
+        "rotationDeg": 0
+      },
+      "master": {
+        "anchorX": 73.1484375,
+        "anchorY": 341.234375,
+        "visibleWidth": 13.671875,
+        "visibleHeight": 15.609375,
+        "rotationDeg": 0
+      },
+      "asset": null,
+      "svgPath": "M75,342 L83,358 M83,342 L75,358 M67,350 L83,350 M75,334 L75,366",
+      "opacity": 0.4,
+      "zIndex": 4,
+      "status": "MEASURED"
+    },
+    {
+      "id": "sparkle-right-01",
+      "type": "sparkle",
+      "source": {
+        "anchorXPx": 948,
+        "anchorYPx": 420,
+        "visibleWidthPx": 15,
+        "visibleHeightPx": 17,
+        "rotationDeg": -20
+      },
+      "master": {
+        "anchorX": 924.609375,
+        "anchorY": 409.609375,
+        "visibleWidth": 14.6484375,
+        "visibleHeight": 16.5859375,
+        "rotationDeg": -20
+      },
+      "asset": null,
+      "svgPath": "M948,410 L956,428 M956,410 L948,428 M940,419 L956,419 M948,402 L948,436",
+      "opacity": 0.4,
+      "zIndex": 4,
+      "status": "MEASURED"
+    },
+    {
+      "id": "sparkle-bottom-left-01",
+      "type": "sparkle",
+      "source": {
+        "anchorXPx": 155,
+        "anchorYPx": 1320,
+        "visibleWidthPx": 18,
+        "visibleHeightPx": 20,
+        "rotationDeg": 35
+      },
+      "master": {
+        "anchorX": 151.2421875,
+        "anchorY": 1287.109375,
+        "visibleWidth": 17.546875,
+        "visibleHeight": 19.53125,
+        "rotationDeg": 35
+      },
+      "asset": null,
+      "svgPath": "M155,1310 L165,1330 M165,1310 L155,1330 M147,1320 L167,1320 M155,1302 L155,1338",
+      "opacity": 0.55,
+      "zIndex": 4,
+      "status": "MEASURED"
+    },
+    {
+      "id": "sparkle-bottom-center-01",
+      "type": "sparkle",
+      "source": {
+        "anchorXPx": 512,
+        "anchorYPx": 1460,
+        "visibleWidthPx": 14,
+        "visibleHeightPx": 16,
+        "rotationDeg": 0
+      },
+      "master": {
+        "anchorX": 499.3046875,
+        "anchorY": 1423.828125,
+        "visibleWidth": 13.671875,
+        "visibleHeight": 15.609375,
+        "rotationDeg": 0
+      },
+      "asset": null,
+      "svgPath": "M512,1450 L520,1466 M520,1450 L512,1466 M504,1458 L520,1458 M512,1442 L512,1474",
+      "opacity": 0.5,
+      "zIndex": 4,
+      "status": "MEASURED"
+    },
+    {
+      "id": "sparkle-bottom-right-01",
+      "type": "sparkle",
+      "source": {
+        "anchorXPx": 868,
+        "anchorYPx": 1345,
+        "visibleWidthPx": 18,
+        "visibleHeightPx": 20,
+        "rotationDeg": -35
+      },
+      "master": {
+        "anchorX": 846.4453125,
+        "anchorY": 1311.3671875,
+        "visibleWidth": 17.546875,
+        "visibleHeight": 19.53125,
+        "rotationDeg": -35
+      },
+      "asset": null,
+      "svgPath": "M868,1335 L878,1355 M878,1335 L868,1355 M860,1345 L880,1345 M868,1327 L868,1363",
+      "opacity": 0.55,
+      "zIndex": 4,
+      "status": "MEASURED"
+    }
+  ],
+  "summary": {
+    "featherCount": 7,
+    "flowLineCount": 6,
+    "sparkleCount": 8,
+    "microAccentCount": 0,
+    "totalDecorationCount": 21
+  }
+}

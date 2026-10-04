@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1500" fill="none">
+  <!-- TOP LEFT: short pink gesture with a tiny integrated heart, kept left of header center -->
+  <path d="M-24 176
+           C22 144 57 120 91 111
+           C112 105 129 108 138 120
+           C147 132 143 147 130 155
+           C116 164 100 160 94 147
+           C88 134 95 121 108 117
+           C123 112 137 120 141 134
+           C147 154 133 173 107 190
+           C75 211 43 228 -14 257"
+        stroke="#E987E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".76"/>
+
+  <!-- TOP RIGHT: quiet lavender arc, visually answering the upper-left gesture -->
+  <path d="M700 82
+           C768 52 835 47 895 61
+           C944 72 981 94 1028 128"
+        stroke="#8E6CFF" stroke-width="2.0" stroke-linecap="round" stroke-linejoin="round" opacity=".78"/>
+
+  <!-- LEFT MID: isolated blue accent, not connected into a frame -->
+  <path d="M17 708
+           C43 736 55 770 51 807
+           C48 839 35 866 9 891"
+        stroke="#778BFF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity=".66"/>
+
+  <!-- RIGHT MID/LOW: organic purple thread with one heart loop in decorative corridor -->
+  <path d="M1027 812
+           C992 840 974 875 972 914
+           C970 945 978 968 994 984
+           C1007 997 1008 1012 998 1024
+           C987 1037 969 1036 959 1024
+           C949 1012 952 997 965 989
+           C979 980 994 985 1001 997
+           C1010 1013 1004 1030 989 1045
+           C973 1060 953 1074 939 1092
+           C924 1111 921 1133 929 1153"
+        stroke="#B35BEB" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity=".78"/>
+
+  <!-- BOTTOM LEFT: pink accent kept outside central transport controls -->
+  <path d="M-30 1395
+           C30 1372 83 1363 128 1368
+           C170 1373 202 1390 232 1409"
+        stroke="#E987E8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity=".64"/>
+
+  <!-- BOTTOM RIGHT: blue answer, starts well right of play/next and exits canvas -->
+  <path d="M760 1417
+           C802 1405 839 1406 873 1418
+           C917 1434 958 1442 1029 1426"
+        stroke="#778BFF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" opacity=".66"/>
+</svg>

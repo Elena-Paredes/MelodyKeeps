@@ -1,0 +1,40 @@
+{
+  "id": "_generic",
+  "name": "Generic Back",
+  "type": "back",
+  "status": "fallback",
+  "contentZones": {
+    "background": {
+      "color": "#FFFFFF",
+      "description": "Canvas background"
+    },
+    "qrCode": {
+      "x": 350,
+      "y": 300,
+      "width": 300,
+      "height": 300,
+      "description": "Standard QR code placement"
+    },
+    "cta": {
+      "x": 500,
+      "y": 700,
+      "textAnchor": "middle",
+      "fontSize": 36,
+      "text": "ESCANEA Y ESCUCHA",
+      "description": "Call-to-action under QR"
+    },
+    "quote": {
+      "x": 500,
+      "y": 900,
+      "width": 800,
+      "textAnchor": "middle",
+      "fontSize": 28,
+      "description": "Song-specific quote"
+    },
+    "songArtist": {
+      "songTitle": { "x": 500, "y": 1100, "fontSize": 32, "textAnchor": "middle" },
+      "artist": { "x": 500, "y": 1150, "fontSize": 24, "textAnchor": "middle" },
+      "description": "Song and artist identification"
+    }
+  }
+}

@@ -1,0 +1,267 @@
+{
+  "canvas": {
+    "width": 1000,
+    "height": 1500,
+    "aspectRatio": "2:3",
+    "description": "Master coordinate system. All coordinates are in master units (1000×1500)."
+  },
+  "reference": {
+    "sourceWidth": 1024,
+    "sourceHeight": 1536,
+    "scale": 0.9765625,
+    "note": "Source measurements from disenio-adelante-todos.png, then scaled to master"
+  },
+  "layout": {
+    "background": {
+      "x": 0,
+      "y": 0,
+      "width": 1000,
+      "height": 1500,
+      "fill": "#FFFFFF",
+      "description": "Full canvas background"
+    },
+    "header": {
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 1000,
+        "height": 170,
+        "description": "Header region"
+      },
+      "chevron": {
+        "path": "M101 96 L120 115 L139 96",
+        "stroke": "#111111",
+        "strokeWidth": 3,
+        "fill": "none",
+        "strokeLinecap": "round",
+        "strokeLinejoin": "round",
+        "description": "Down arrow at top-left"
+      },
+      "text_line_1": {
+        "x": 500,
+        "y": 95,
+        "text": "PLAYING FROM PLAYLIST",
+        "fontFamily": "Inter",
+        "fontWeight": 400,
+        "fontSize": 21,
+        "letterSpacing": 3,
+        "fill": "#111111",
+        "opacity": 0.9,
+        "textAnchor": "middle",
+        "description": "Header line 1, centered"
+      },
+      "text_line_2": {
+        "x": 500,
+        "y": 135,
+        "text": "BTS // favorites 💜",
+        "fontFamily": "Inter",
+        "fontWeight": 400,
+        "fontSize": 27,
+        "fill": "#111111",
+        "textAnchor": "middle",
+        "description": "Header line 2, centered, shows playlist/artist"
+      },
+      "dots": {
+        "description": "Three-dot menu at top-right",
+        "dot_1": {
+          "cx": 856,
+          "cy": 105,
+          "r": 3.5,
+          "fill": "#111111"
+        },
+        "dot_2": {
+          "cx": 878,
+          "cy": 105,
+          "r": 3.5,
+          "fill": "#111111"
+        },
+        "dot_3": {
+          "cx": 900,
+          "cy": 105,
+          "r": 3.5,
+          "fill": "#111111"
+        }
+      }
+    },
+    "artwork": {
+      "x": 170,
+      "y": 205,
+      "width": 660,
+      "height": 660,
+      "cornerRadius": 28,
+      "center": [500, 535],
+      "clipPath": "artwork-clip",
+      "preserveAspectRatio": "xMidYMid slice",
+      "description": "Album cover image, always square, center-cropped",
+      "bounds": {
+        "left": 170,
+        "top": 205,
+        "right": 830,
+        "bottom": 865
+      }
+    },
+    "track_info": {
+      "title": {
+        "x": 135,
+        "y": 930,
+        "fontFamily": "Inter",
+        "fontWeight": 700,
+        "fontSize": 43,
+        "fill": "#111111",
+        "textAnchor": "start",
+        "description": "Song title, left-aligned, baseline at y=930"
+      },
+      "artist": {
+        "x": 135,
+        "y": 980,
+        "fontFamily": "Inter",
+        "fontWeight": 400,
+        "fontSize": 30,
+        "fill": "#66666F",
+        "textAnchor": "start",
+        "description": "Artist name, left-aligned, baseline at y=980"
+      },
+      "heart": {
+        "cx": 835,
+        "cy": 930,
+        "visualSize": [43, 43],
+        "stroke": "#3A3A42",
+        "strokeWidth": 3,
+        "fill": "none",
+        "strokeLinecap": "round",
+        "strokeLinejoin": "round",
+        "description": "Heart icon, right-aligned with title"
+      }
+    },
+    "waveform": {
+      "region": {
+        "x": 135,
+        "y": 1060,
+        "width": 730,
+        "height": 82,
+        "description": "Waveform bar area"
+      },
+      "bars": {
+        "count": 100,
+        "barWidth": 6.6,
+        "barSpacing": 0.4,
+        "fill": "gradient(accentStart to accentEnd)",
+        "description": "100 bars from accentStart→accentEnd gradient"
+      }
+    },
+    "time_labels": {
+      "elapsed": {
+        "x": 135,
+        "y": 1215,
+        "fontFamily": "Inter",
+        "fontWeight": 400,
+        "fontSize": 25,
+        "fill": "#111111",
+        "textAnchor": "start",
+        "description": "Current time MM:SS, left-aligned"
+      },
+      "total": {
+        "x": 865,
+        "y": 1215,
+        "fontFamily": "Inter",
+        "fontWeight": 400,
+        "fontSize": 25,
+        "fill": "#111111",
+        "textAnchor": "end",
+        "description": "Total duration MM:SS, right-aligned"
+      }
+    },
+    "controls": {
+      "region": {
+        "x": 127,
+        "y": 1260,
+        "width": 746,
+        "height": 200,
+        "description": "Playback controls region"
+      },
+      "shuffle": {
+        "x": 127,
+        "y": 1305,
+        "width": 46,
+        "height": 46,
+        "viewBox": "0 0 24 24",
+        "description": "Shuffle icon (SVG nested)"
+      },
+      "shuffle_active": {
+        "cx": 150,
+        "cy": 1364,
+        "r": 4,
+        "fill": "#20D760",
+        "description": "Shuffle active indicator dot"
+      },
+      "previous": {
+        "x": 330,
+        "y": 1328,
+        "width": 40,
+        "height": 40,
+        "description": "Previous track icon"
+      },
+      "play_pause": {
+        "circle": {
+          "cx": 500,
+          "cy": 1328,
+          "r": 56,
+          "fill": "#111111",
+          "description": "Play/Pause button circle"
+        },
+        "icon": {
+          "cx": 500,
+          "cy": 1328,
+          "fill": "#FFFFFF",
+          "description": "Play (▶) or Pause (⏸) icon"
+        }
+      },
+      "next": {
+        "x": 670,
+        "y": 1328,
+        "width": 40,
+        "height": 40,
+        "description": "Next track icon"
+      },
+      "repeat": {
+        "x": 827,
+        "y": 1305,
+        "width": 46,
+        "height": 46,
+        "viewBox": "0 0 24 24",
+        "description": "Repeat icon (SVG nested)"
+      }
+    }
+  },
+  "decorations": {
+    "description": "Purple decorative layer (deterministic, identical for all songs)",
+    "feathers": 7,
+    "flow_lines": 6,
+    "sparkles": 8,
+    "total": 21,
+    "note": "See decoration-manifest.json for individual placement"
+  },
+  "constraints": {
+    "artwork_free_region": {
+      "left": 170,
+      "top": 205,
+      "right": 830,
+      "bottom": 865,
+      "description": "Decorations must NOT obscure this region"
+    },
+    "text_free_region": {
+      "left": 135,
+      "top": 900,
+      "right": 865,
+      "bottom": 1010,
+      "description": "Decorations must NOT obscure title/artist text"
+    },
+    "controls_free_region": {
+      "left": 100,
+      "top": 1260,
+      "right": 900,
+      "bottom": 1480,
+      "description": "Decorations must NOT obscure playback controls"
+    }
+  }
+}

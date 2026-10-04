@@ -1,0 +1,37 @@
+# Dependencias y compilados
+node_modules/
+dist/
+.angular/
+bin/
+obj/
+.vs/
+*.user
+*.log
+
+# Repo de referencia ajeno (tiene su propio .git)
+reference-spotify-clone/
+
+# --- Credenciales y configuración local (frontend y backend) ---
+.env
+.env.*
+!.env.example
+!.env.*.example
+**/appsettings.*.json
+!**/appsettings.*.example.json
+**/secrets.json
+**/user-secrets/
+*.pem
+*.key
+*.pfx
+*.p12
+*.crt
+*.cer
+*.jks
+*.keystore
+id_rsa*
+.claude/
+**/.claude/
+
+# Herramientas locales y artefactos de revisión
+.codebase-memory/
+**/_review/
