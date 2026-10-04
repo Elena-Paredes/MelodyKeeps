@@ -1,6 +1,8 @@
-# MelodyKeeps
+# MelodyKeeps: guía para desarrolladores
 
-Convierte tu canción favorita en un recuerdo físico. El usuario elige una canción, el diseño del frente y el producto (llavero o sticker). La app compone el **frente** (player + decoración) y el **reverso** (código de Spotify) de la pieza.
+Detalles técnicos del proyecto: tecnologías, estructura, cómo correrlo en local y cómo se manejan las credenciales. La presentación general está en el [README](README.md).
+
+El usuario elige una canción, el diseño del frente y el producto (llavero o sticker). La app compone el **frente** (player + decoración) y el **reverso** (código de Spotify) de la pieza.
 
 ## Tecnologías
 
