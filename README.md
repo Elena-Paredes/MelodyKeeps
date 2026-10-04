@@ -22,5 +22,4 @@ Hay canciones que marcan una etapa, un abrazo, un verano. MelodyKeeps las convie
 MelodyKeeps está en construcción y estamos puliendo cada detalle antes de abrirlo al público. Pronto habrá más canciones, más diseños y más colores.
 
 ---
-
-<img width="918" height="976" alt="image" src="https://github.com/user-attachments/assets/a921e814-d968-4ca1-8a78-62d40767ff10" />
+<img width="755" height="767" alt="image" src="https://github.com/user-attachments/assets/2f5d0b5b-2246-4435-80c1-0e09a110aef6" />
