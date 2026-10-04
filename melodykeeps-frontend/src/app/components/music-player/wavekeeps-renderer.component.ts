@@ -111,6 +111,6 @@ export class WaveKeepsRendererComponent implements OnChanges {
   }
 
   getAssetPath(src: string): string {
-    return this.wavekeeps.getAssetPath(this.manifestId ?? this.design.designId, src);
+    return this.wavekeeps.getAssetPath(this.manifestId ?? this.design.designId, src, this.design.variantId);
   }
 }

@@ -10,6 +10,8 @@ export interface MusicPlayerDesign {
   waveform: number[];
 
   designId: string;
+  backDesignId?: string;
+  variantId?: string;
   playlistLabel?: string;
 
   playbackState: "playing" | "paused";

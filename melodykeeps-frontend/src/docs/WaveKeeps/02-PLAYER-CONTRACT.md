@@ -1,12 +1,29 @@
 # WaveKeeps — Verified Player Contract
 
-> STATUS: VERIFIED / LOCKED
+> STATUS: V2 APPROVED / LOCKED
+> APPROVED ACTIVE PLAYER: Spotify Code + Linear Progress + Timers
 > DECORATIVE DESIGN: OUT OF SCOPE.
 
 Master:
 
 ```text
 1000×1500
+```
+
+## Approved active player composition
+
+```text
+header + artwork + title + artist + heart
++
+Spotify Code (song-specific)
++
+Linear Progress Bar (dynamic)
++
+Timers (relocated)
++
+playback controls
++
+utility icons
 ```
 
 ## Locked geometry
@@ -22,13 +39,28 @@ TRACK_ARTIST
 x=135 y=980 font=Inter weight=400 size=30
 
 HEART_ICON
-centerX=835 centerY=930
+centerX=835 centerY=930 fill=#E63946 (red)
+
+SPOTIFY_CODE
+x=250 y=1070 width=500 height=125
+aspectRatio=4:1 (preserved, no stretch)
+source=assets/wavekeeps/designs/back/<backDesignId>/assets/svg/spotify-code.svg
+load=local (no runtime Spotify/scannables requests)
+
+LINEAR_PROGRESS
+startX=135 endX=865 y=1225
+length=730 strokeWidth=5 lineCap=round
+completed=#111111
+remaining=#D7D7DE
+knob: centerY=1225 radius=8 fill=#111111
+position: dynamic
+  formula: progressX = 135 + (730 * clamp(currentSeconds/totalSeconds, 0, 1))
 
 TIMER_ELAPSED
-x=135 y=1215 fontSize=25
+x=135 y=1265 fontSize=25 textAnchor=start
 
 TIMER_TOTAL
-x=865 y=1215 fontSize=25 textAnchor=end
+x=865 y=1265 fontSize=25 textAnchor=end
 
 CONTROL_SHUFFLE
 x=127 y=1305 width=46 height=46

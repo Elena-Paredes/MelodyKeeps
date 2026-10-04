@@ -55,7 +55,17 @@ export class WaveKeepsService {
     }
   }
 
-  getAssetPath(designId: string, assetPath: string): string {
+  getAssetPath(designId: string, assetPath: string, variantId?: string): string {
+    if (variantId) {
+      if (assetPath.startsWith('assets/png/')) {
+        const filename = assetPath.substring('assets/png/'.length);
+        return `/assets/wavekeeps/designs/front/${designId}/assets/variants/${variantId}/feathers/${filename}`;
+      }
+      if (assetPath.startsWith('assets/svg/')) {
+        const filename = assetPath.substring('assets/svg/'.length);
+        return `/assets/wavekeeps/designs/front/${designId}/assets/variants/${variantId}/threads/${filename}`;
+      }
+    }
     return `/assets/wavekeeps/designs/front/${designId}/${assetPath}`;
   }
 }

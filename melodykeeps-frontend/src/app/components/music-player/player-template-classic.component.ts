@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MusicPlayerDesign } from './music-player.model';
 import * as QRCode from 'qrcode';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { SUPPORTED_SONGS } from '../../data/supported-songs';
 
 @Component({
   selector: 'app-player-template-classic',
@@ -107,34 +108,56 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
         [attr.d]="getHeartPath(835, 930)"
         [attr.stroke]="theme.heart"
         stroke-width="3"
-        fill="none"
+        fill="#000000"
         stroke-linecap="round"
         stroke-linejoin="round"
       />
 
-      <!-- Waveform -->
-      <defs>
-        <linearGradient id="waveform-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" [attr.stop-color]="theme.accentStart" />
-          <stop offset="100%" [attr.stop-color]="theme.accentEnd" />
-        </linearGradient>
-      </defs>
-      <g id="waveform">
-        <rect *ngFor="let bar of getWaveformBars()"
-          [attr.x]="bar.x"
-          [attr.y]="bar.y"
-          [attr.width]="bar.width"
-          [attr.height]="bar.height"
-          rx="3"
-          ry="3"
-          [attr.fill]="bar.fill"
+      <!-- Spotify Code (WaveKeeps: direct SVG reference to back design asset) -->
+      <image
+        x="250"
+        y="1070"
+        width="500"
+        height="125"
+        [attr.href]="'assets/wavekeeps/designs/back/' + (design.backDesignId || '') + '/assets/svg/spotify-code.svg'"
+        preserveAspectRatio="xMidYMid meet"
+      />
+
+      <!-- Linear Progress Bar -->
+      <g id="linear-progress">
+        <!-- Background track -->
+        <line
+          x1="135"
+          y1="1225"
+          x2="865"
+          y2="1225"
+          [attr.stroke]="'#D7D7DE'"
+          stroke-width="5"
+          stroke-linecap="round"
+        />
+        <!-- Completed track -->
+        <line
+          x1="135"
+          y1="1225"
+          [attr.x2]="getProgressX()"
+          y2="1225"
+          [attr.stroke]="'#111111'"
+          stroke-width="5"
+          stroke-linecap="round"
+        />
+        <!-- Progress knob -->
+        <circle
+          [attr.cx]="getProgressX()"
+          cy="1225"
+          r="8"
+          [attr.fill]="'#111111'"
         />
       </g>
 
       <!-- Time Labels -->
       <text
         x="135"
-        y="1215"
+        y="1265"
         font-family="Inter"
         font-weight="400"
         font-size="25"
@@ -145,7 +168,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
       </text>
       <text
         x="865"
-        y="1215"
+        y="1265"
         font-family="Inter"
         font-weight="400"
         font-size="25"
@@ -154,9 +177,6 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
       >
         {{ formatTime(design.durationSeconds) }}
       </text>
-
-      <!-- Spotify-style code placeholder (x=220 y=1128 w=560 h=64) - to be implemented per theme -->
-      <!-- This region reserved for Spotify code or official code asset -->
 
       <!-- Playback Controls -->
       <g id="controls">
@@ -404,5 +424,13 @@ export class PlayerTemplateClassicComponent implements OnChanges {
 
   getPlayPauseIconColor(): string {
     return '#FFFFFF';
+  }
+
+  getProgressX(): number {
+    // ponytail: linear progress bar knob position, y=1225
+    const ratio = this.design.durationSeconds > 0
+      ? Math.max(0, Math.min(1, this.design.currentTimeSeconds / this.design.durationSeconds))
+      : 0;
+    return 135 + (730 * ratio);
   }
 }

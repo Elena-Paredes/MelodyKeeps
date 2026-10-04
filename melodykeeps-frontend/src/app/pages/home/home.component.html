@@ -7,9 +7,29 @@
       <p class="text-sm text-plum/60 mt-1">Convierte tu canción favorita en un recuerdo físico</p>
     </div>
 
-    <!-- 1. Seleccionar canción -->
+    <!-- 1. Producto -->
     <section class="rounded-3xl bg-white/80 backdrop-blur-sm shadow-lg shadow-violet/10 p-6">
-      <h2 class="font-semibold text-plum mb-3">1. Selecciona tu canción</h2>
+      <h2 class="font-semibold text-plum mb-3">1. Elige tu producto</h2>
+
+      <div class="grid grid-cols-2 gap-3">
+        @for (product of products; track product.id) {
+          <button
+            type="button"
+            (click)="selectProduct(product.id)"
+            class="flex flex-col items-center gap-1 rounded-2xl py-4 border-2 transition"
+            [class]="selectedProduct() === product.id ? 'border-accent bg-peach/40' : 'border-transparent bg-babyblue/20'"
+          >
+            <span class="text-2xl">{{ product.icon }}</span>
+            <span class="text-sm font-medium text-plum">{{ product.label }}</span>
+            <span class="text-xs text-plum/50">{{ product.size }}</span>
+          </button>
+        }
+      </div>
+    </section>
+
+    <!-- 2. Seleccionar canción -->
+    <section class="rounded-3xl bg-white/80 backdrop-blur-sm shadow-lg shadow-violet/10 p-6">
+      <h2 class="font-semibold text-plum mb-3">2. Selecciona tu canción</h2>
 
       <div class="grid grid-cols-2 gap-2 max-h-64 overflow-y-auto">
         @for (song of supportedSongs(); track song.id) {
@@ -26,9 +46,9 @@
       </div>
     </section>
 
-    <!-- 2. Foto propia -->
+    <!-- 3. Foto propia -->
     <section class="rounded-3xl bg-white/80 backdrop-blur-sm shadow-lg shadow-violet/10 p-6">
-      <h2 class="font-semibold text-plum mb-3">2. ¿Quieres poner tu propia foto?</h2>
+      <h2 class="font-semibold text-plum mb-3">3. ¿Quieres poner tu propia foto?</h2>
 
       <div class="flex gap-2">
         <button
@@ -72,25 +92,6 @@
       }
     </section>
 
-    <!-- 3. Producto -->
-    <section class="rounded-3xl bg-white/80 backdrop-blur-sm shadow-lg shadow-violet/10 p-6">
-      <h2 class="font-semibold text-plum mb-3">3. Elige tu producto</h2>
-
-      <div class="grid grid-cols-3 gap-3">
-        @for (product of products; track product.id) {
-          <button
-            type="button"
-            (click)="selectProduct(product.id)"
-            class="flex flex-col items-center gap-1 rounded-2xl py-4 border-2 transition"
-            [class]="selectedProduct() === product.id ? 'border-accent bg-peach/40' : 'border-transparent bg-babyblue/20'"
-          >
-            <span class="text-2xl">{{ product.icon }}</span>
-            <span class="text-sm font-medium text-plum">{{ product.label }}</span>
-            <span class="text-xs text-plum/50">{{ product.size }}</span>
-          </button>
-        }
-      </div>
-    </section>
 
     @if (createError()) {
       <p class="text-sm text-red-500 text-center">{{ createError() }}</p>
@@ -99,7 +100,8 @@
     <!-- 4. Diseño del reproductor -->
     @if (playerDesign(); as design) {
       <section class="rounded-3xl bg-white/80 backdrop-blur-sm shadow-lg shadow-violet/10 p-6">
-        <h2 class="font-semibold text-plum mb-3">4. Elige tu diseño</h2>
+        <h2 class="font-semibold text-plum mb-3">4. Vista previa del producto</h2>
+        <h3 class="font-medium text-plum/80 mb-3 text-sm">Elige tu diseño decorativo</h3>
 
         <div class="grid grid-cols-2 gap-3">
           @for (design of availableDesigns(); track design.id) {
@@ -117,7 +119,7 @@
       </section>
 
       <section class="rounded-3xl bg-white/80 backdrop-blur-sm shadow-lg shadow-violet/10 p-6">
-        <h2 class="font-semibold text-plum mb-4">Vista previa del producto</h2>
+        <h2 class="font-semibold text-plum mb-4">Vista previa</h2>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <!-- FRONT -->
           <div class="flex flex-col items-center">
@@ -160,6 +162,44 @@
           class="rounded-xl bg-gradient-to-r from-violet to-accent text-white font-semibold py-2 px-6 shadow-md hover:opacity-90 transition"
         >
           🖨️ Imprimir diseño
+        </button>
+      </section>
+    }
+
+    <!-- 5. Imprimir lote de 12 diseños -->
+    @if (printAllLayouts(); as batch) {
+      <section class="rounded-3xl bg-gradient-to-br from-accent/10 to-violet/10 border-2 border-accent/30 shadow-lg shadow-accent/10 p-6">
+        <h2 class="font-semibold text-plum mb-2">🖨️ Imprimir todos (12 diseños)</h2>
+        <p class="text-sm text-plum/60 mb-4">{{ batch.product === 'keychain' ? 'Llaveros' : 'Stickers' }} - Imprime una hoja con los 12 diseños</p>
+
+        <div class="bg-white rounded-2xl p-4 mb-4 overflow-hidden">
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
+            @for (design of batch.designs; track design.song.id) {
+              <div style="
+                aspect-ratio: 2/3;
+                background: linear-gradient(135deg, #e8f4f8 0%, #c0e4f0 100%);
+                border: 1px solid #0066cc;
+                border-radius: 6px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                gap: 4px;
+                padding: 8px;
+                text-align: center;
+              ">
+                <div style="font-size: 10px; font-weight: bold; color: #0066cc;">{{ design.song.title }}</div>
+                <div style="font-size: 8px; color: #666;">{{ design.song.variantId || 'Purple' }}</div>
+              </div>
+            }
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="w-full rounded-xl bg-gradient-to-r from-accent to-violet text-white font-semibold py-3 shadow-md hover:opacity-90 transition"
+        >
+          🖨️ Imprimir 12 {{ batch.product === 'keychain' ? 'Llaveros' : 'Stickers' }}
         </button>
       </section>
     }

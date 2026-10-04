@@ -38,6 +38,8 @@ export class PlayerDemoComponent {
 
     playlistLabel: 'BTS // favorites 💜',
     designId: 'purple-feathers',
+    backDesignId: 'spring-day',
+    variantId: undefined,
 
     playbackState: 'playing',
   };

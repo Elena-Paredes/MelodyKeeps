@@ -61,6 +61,9 @@ export class HomeComponent implements OnInit {
   selectedSongId = signal<string | null>(null);
   selectedSongData = signal<WaveKeepsSong | null>(null);
 
+  // Print batch (12 designs)
+  printAllLayouts = signal<{ product: Product; designs: (MusicPlayerDesign & { song: WaveKeepsSong })[] } | null>(null);
+
   constructor(
     private songs: SongsService,
     private designs: DesignsService,
@@ -97,6 +100,8 @@ export class HomeComponent implements OnInit {
       artworkUrl: song.coverUrl || 'https://i.scdn.co/image/ab67616d0000b27312345678901234567890abcd',
       spotifyLink: `spotify:track:${song.spotifyTrackId}`,
       designId: this.selectedDesignId(),
+      backDesignId: song.backDesignId,
+      variantId: song.variantId,
       currentTimeSeconds: 45,
       durationSeconds: 274,
       waveform: Array(100).fill(0).map(() => Math.random()),
@@ -125,7 +130,27 @@ export class HomeComponent implements OnInit {
 
   selectProduct(id: Product) {
     this.selectedProduct.set(id);
-    // Player design is already set when selectSupportedSong is called
+    this.generatePrintBatch(id);
+  }
+
+  generatePrintBatch(product: Product) {
+    const designs = this.supportedSongs().map(song => ({
+      title: song.title,
+      artist: song.artist,
+      artworkUrl: song.coverUrl || 'https://i.scdn.co/image/ab67616d0000b27312345678901234567890abcd',
+      spotifyLink: `spotify:track:${song.spotifyTrackId}`,
+      designId: this.selectedDesignId(),
+      backDesignId: song.backDesignId,
+      variantId: song.variantId,
+      currentTimeSeconds: 45,
+      durationSeconds: 274,
+      waveform: Array(100).fill(0).map(() => Math.random()),
+      playlistLabel: `${song.artist} // favorites 💜`,
+      playbackState: 'playing' as const,
+      song,
+    }));
+
+    this.printAllLayouts.set({ product, designs });
   }
 
   async onCreateDesign() {

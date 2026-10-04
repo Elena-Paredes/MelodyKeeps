@@ -7,6 +7,7 @@ export interface WaveKeepsSong {
   quote: string;
   backDesignId: string;
   coverUrl?: string; // populated from Spotify
+  variantId?: string; // decorative variant (default: purple-feathers)
 }
 
 export const SUPPORTED_SONGS: WaveKeepsSong[] = [
@@ -18,6 +19,7 @@ export const SUPPORTED_SONGS: WaveKeepsSong[] = [
     quote: 'Espero el día en que pueda saludarte de nuevo. Aunque estés lejos de mí ahora...',
     backDesignId: 'spring-day',
     coverUrl: 'https://i.scdn.co/image/ab67616d0000b2731fd0a8fc28b2a0a5d9cdc6c6',
+    variantId: 'ynwa',
   },
   {
     id: 'swim',
@@ -27,6 +29,7 @@ export const SUPPORTED_SONGS: WaveKeepsSong[] = [
     quote: 'Nada a través de la vida como el mar, sin miedo a hundirse...',
     backDesignId: 'swim',
     coverUrl: 'https://i.scdn.co/image/ab67616d0000b273dfa17fad7f190c901603270e',
+    variantId: 'arirang-red',
   },
   {
     id: 'fake-love',
@@ -36,6 +39,7 @@ export const SUPPORTED_SONGS: WaveKeepsSong[] = [
     quote: 'Ojalá el amor fuera perfecto como el amor por sí mismo...',
     backDesignId: 'fake-love',
     coverUrl: 'https://i.scdn.co/image/ab67616d0000b273a274bd961be8afb88d0d5c54',
+    variantId: 'tear',
   },
   {
     id: 'dna',
@@ -45,6 +49,7 @@ export const SUPPORTED_SONGS: WaveKeepsSong[] = [
     quote: 'Está en nuestro ADN, escrito en las estrellas...',
     backDesignId: 'dna',
     coverUrl: 'https://i.scdn.co/image/ab67616d0000b273af396dce4438624ec801ff1a',
+    variantId: 'her',
   },
   {
     id: 'blood-sweat-tears',
@@ -54,6 +59,7 @@ export const SUPPORTED_SONGS: WaveKeepsSong[] = [
     quote: 'Sé que necesitas sudor y sangre. Daré todo lo que tengo...',
     backDesignId: 'blood-sweat-tears',
     coverUrl: 'https://i.scdn.co/image/ab67616d0000b2738bd5d941f9ced8e7f9c60dd4',
+    variantId: 'wings',
   },
   {
     id: 'run',
@@ -63,6 +69,7 @@ export const SUPPORTED_SONGS: WaveKeepsSong[] = [
     quote: 'Por favor, hazme correr más, incluso si mis pies están llenos de cicatrices...',
     backDesignId: 'run',
     coverUrl: 'https://i.scdn.co/image/ab67616d0000b27317db30ce3f081d6818a8ad49',
+    variantId: 'hyyh',
   },
   {
     id: 'mikrokosmos',
@@ -72,6 +79,7 @@ export const SUPPORTED_SONGS: WaveKeepsSong[] = [
     quote: 'Tú eres mi pequeño universo, mi razón de existir...',
     backDesignId: 'mikrokosmos',
     coverUrl: 'https://i.scdn.co/image/ab67616d0000b27318d0ed4f969b376893f9a38f',
+    variantId: 'persona',
   },
   {
     id: 'pied-piper',
@@ -81,6 +89,7 @@ export const SUPPORTED_SONGS: WaveKeepsSong[] = [
     quote: 'Cierra los ojos y escucha: sigue el sonido de la flauta...',
     backDesignId: 'pied-piper',
     coverUrl: 'https://i.scdn.co/image/ab67616d0000b27340f078d0a28bffb93e2e2c11',
+    variantId: 'her',
   },
   {
     id: 'dimple',
@@ -90,6 +99,7 @@ export const SUPPORTED_SONGS: WaveKeepsSong[] = [
     quote: 'Tu existencia es un crimen, fue un error cometido por un ángel...',
     backDesignId: 'dimple',
     coverUrl: 'https://i.scdn.co/image/ab67616d0000b273af396dce4438624ec801ff1a',
+    variantId: 'her',
   },
   {
     id: 'we-are-bulletproof',
@@ -99,6 +109,7 @@ export const SUPPORTED_SONGS: WaveKeepsSong[] = [
     quote: 'Éramos solo siete, pero ahora las tenemos a todas ustedes...',
     backDesignId: 'we-are-bulletproof',
     coverUrl: 'https://i.scdn.co/image/ab67616d0000b273505190077497c230422f2934',
+    variantId: 'mots7',
   },
   {
     id: 'im-fine',
@@ -108,14 +119,16 @@ export const SUPPORTED_SONGS: WaveKeepsSong[] = [
     quote: 'En la noche más negra, la oscuridad sacude los sueños dormidos...',
     backDesignId: 'im-fine',
     coverUrl: 'https://i.scdn.co/image/ab67616d0000b273af396dce4438624ec801ff1a',
+    variantId: 'answer',
   },
   {
     id: 'animals',
-    title: 'Anpanman',
+    title: 'Like Animals',
     artist: 'BTS',
-    spotifyTrackId: '453W8V5Ynwn6Tr28KuOwsO',
+    spotifyTrackId: '2IFND3phjzIG1RcPnHh2hP',
     quote: 'Somos héroes en nuestro propio mundo...',
     backDesignId: 'animals',
-    coverUrl: 'https://i.scdn.co/image/ab67616d0000b273af396dce4438624ec801ff1a',
+    coverUrl: '', // TODO: update with correct ARIRANG album cover URL
+    variantId: 'arirang-red',
   },
 ];

@@ -86,10 +86,21 @@ Do not migrate frameworks.
 ``` text
 PLAYER_GEOMETRY = VERIFIED + IMMUTABLE
 DECORATION = ADAPTS AROUND PLAYER
+FRONT_INCLUDES = verified player + song-specific Spotify Code + decorative design
 ```
 
 Never remeasure/move/recalculate player geometry while implementing
 decoration.
+
+The verified player now includes a song-specific Spotify Code element
+(resolves from back-design assets locally; no runtime Spotify/scannable
+requests).
+
+Detailed player contract and Spotify Code geometry:
+
+``` text
+→ 02-PLAYER-CONTRACT.md
+```
 
 ## 6. Responsibility split
 
