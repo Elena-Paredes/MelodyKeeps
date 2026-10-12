@@ -1,7 +1,8 @@
 # WaveKeeps — Verified Player Contract
 
-> STATUS: V2 APPROVED / LOCKED
-> APPROVED ACTIVE PLAYER: Spotify Code + Linear Progress + Timers
+> STATUS: PLAYER V2 = HISTORICAL APPROVED BASELINE (the geometry below is V2).
+> PLAYER V3 = CURRENT REVIEW CANDIDATE: not approved, not locked (see "Player V3 (REVIEW)" below).
+> APPROVED ACTIVE PLAYER (V2): Spotify Code + Linear Progress + Timers
 > DECORATIVE DESIGN: OUT OF SCOPE.
 
 Master:
@@ -111,3 +112,43 @@ derive player geometry from painted pixel bounds
 stretch functional icons
 change player spacing for decoration
 ```
+
+## Player V3 (REVIEW)
+
+```text
+PLAYER V3
+STATUS = REVIEW   (NOT APPROVED, NOT LOCKED, NOT FINAL)
+```
+
+V3 is a controlled legibility experiment explicitly authorized by the owner. The V2 geometry
+above stays the historical approved baseline and remains the geometry of record until the owner
+explicitly approves V3. V3 is not an authority for implementation.
+
+- The logical canvas does not change: `1000 × 1500`, ratio 2:3 (no global scale).
+- V3 enlarges elements and widens horizontal use of the canvas; V3 values under review are
+  recorded in `05-PRINT-LAYOUTS.md` (keychain and sticker). V3 does not change FRONT
+  decoration, variants or Spotify Code assets.
+- Spotify Code on the FRONT: the keychain V3 front omits it (it stays on the BACK); the sticker
+  front keeps it (see `05-PRINT-LAYOUTS.md`).
+- Heart shape (universal, REVIEW): one rounded heart ("favorite" shape, ≈ 48.2 wide × 44.2 tall,
+  centered at (900, 955)) defined once in the player (`getHeartPath`). It is used by every mode
+  (with design and without design, light and dark themes); only its colors change per theme.
+  It replaces the earlier hand-drawn, taller shape.
+
+### Display title exception
+
+The canonical song title is never replaced. The player may show a shorter display title when
+the full title does not fit:
+
+```text
+canonical title:     We Are Bulletproof: the Eternal Edition
+player display title: We Are Bulletproof
+```
+
+Rule: the player shows `playerDisplayTitle ?? title`. `playerDisplayTitle` is song data
+(optional field in the song catalog), never a per-song hardcode in the component. It is specific
+to the PLAYER and is not automatically reused on the BACK. No automatic rule (auto-fit, shrinking,
+ellipsis, wrapping) exists; the rest of the catalog uses the canonical title.
+
+Known technical discrepancy: the font `Inter` is declared but not loaded (`unloaded`), so text
+metrics depend on the system fallback font. To be resolved separately.

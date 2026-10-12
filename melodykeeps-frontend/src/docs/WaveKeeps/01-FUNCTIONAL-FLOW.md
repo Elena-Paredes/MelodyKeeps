@@ -22,7 +22,7 @@ preview FRONT / BACK
 ↓
 allowed personalization
 ↓
-resolve QR/link
+resolve Spotify Code/link
 ↓
 validate
 ↓
@@ -61,7 +61,7 @@ FLOW_DECISION_PENDING:
 - persistence of front design across song changes
 - back-design locking/alternatives
 - allowed personalization
-- QR destination/editing behavior
+- Spotify Code destination/editing behavior
 - preview behavior by viewport
 - export formats
 - print requirements

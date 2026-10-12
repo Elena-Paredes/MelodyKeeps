@@ -108,7 +108,7 @@ Do not leave duplicate active old/new asset trees.
 8. place packet in canonical route
 9. Claude runs preflight
 10. Claude renders exactly from manifest
-11. render 1000×1500
+11. render at the side canvas (FRONT 1000×1500 / BACK 380×490)
 12. visual review
 13. correct asset or manifest; never player
 ```
@@ -232,6 +232,9 @@ Conceptual schema:
 }
 ```
 
+The `canvas` value is the canvas of that side: `front` = 1000×1500, `back` = 380×490
+(see `designs/back/README.md`).
+
 `design.md` must not contain a second competing coordinate table.
 
 Rule:
@@ -304,7 +307,8 @@ src/assets/wavekeeps/designs/back/<design-id>/
     └── svg/
 ```
 
-Only content changes.
+Only content changes, plus the canvas: the BACK uses its own 380×490 logical canvas
+(38:49), not the FRONT 1000×1500. General BACK rules: `designs/back/README.md`.
 
 ## 14. Naming
 
@@ -342,7 +346,7 @@ manifest.json: FOUND / MISSING
 <every manifest asset path>: FOUND / MISSING
 
 all declared assets found: YES / NO
-canvas = 1000×1500: YES / NO
+canvas = side canvas (FRONT 1000×1500 / BACK 380×490): YES / NO
 player geometry modified: NO
 undeclared substitute assets created: NO
 ```
@@ -421,11 +425,13 @@ src/assets/wavekeeps/designs/front/<design-id>/
 
 ### Back
 
-Create:
+Create (only after the design's visual approval):
 
 ``` text
-designs/back/<design-id>.md
+designs/back/<design-id>/<design-id>.md
 ```
+
+General BACK rules live in `designs/back/README.md`.
 
 and the runtime packet:
 

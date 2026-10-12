@@ -17,7 +17,7 @@ src/
 │   │   └── home/                  Main app (search, design, player)
 │   │
 │   ├── components/
-│   │   ├── music-player/          Custom player renderer + QR
+│   │   ├── music-player/          Custom player renderer + Spotify Code
 │   │   │   ├── player-demo.component
 │   │   │   ├── player-template-classic.component
 │   │   │   ├── classic-theme.model.ts
@@ -100,7 +100,7 @@ AppComponent
            ├── PlayerTemplateCLassicComponent
            ├── AlbumArtComponent
            ├── ControlsComponent
-           └── QRCodeComponent
+           └── SpotifyCode (local SVG asset per song)
 ```
 
 ## Data Flow (Song → Design → Player)
@@ -109,7 +109,7 @@ AppComponent
 2. Selects song, template (Keychain/Sticker/Card), variant (Dark/Pastel)
 3. `DesignsService.create()` POSTs to backend
 4. Backend returns `Design` with `printFileUrl`
-5. `MusicPlayerComponent` renders preview with QR code
+5. `MusicPlayerComponent` renders preview with the song Spotify Code
 6. Click "Download" → fetch from `printFileUrl`
 
 ## Reactive Patterns

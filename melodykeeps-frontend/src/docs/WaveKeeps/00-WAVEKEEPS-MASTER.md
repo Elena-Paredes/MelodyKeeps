@@ -32,9 +32,16 @@ specific front design
 → 03-DESIGN-METHOD.md
 → designs/front/<design-id>.md
 
+general BACK architecture (canvas, Spotify Code, rules)
+→ designs/back/README.md
+
 specific back design
 → 03-DESIGN-METHOD.md
-→ designs/back/<design-id>.md
+→ designs/back/README.md
+→ designs/back/<design-id>/<design-id>.md   (only after visual approval)
+
+print / PDF export layouts (keychain, sticker)
+→ 05-PRINT-LAYOUTS.md
 ```
 
 ## 2. Authority / precedence
@@ -48,8 +55,14 @@ specific back design
   runtime design routes, asset organization and manifest rules
 
 designs/front/<design-id>.md
-designs/back/<design-id>.md
+designs/back/<design-id>/<design-id>.md
 = authority for the identity/assets/rules of that specific design
+
+designs/back/README.md
+= authority for general BACK architecture (canvas, Spotify Code, rules)
+
+05-PRINT-LAYOUTS.md
+= print/export placement of keychain and sticker (REVIEW)
 
 01-FUNCTIONAL-FLOW.md
 = authority for application behavior
@@ -66,12 +79,16 @@ NOT_IMPLEMENTATION_AUTHORITY
 If an old document conflicts with this modular set, this modular set
 wins.
 
-## 3. Master canvas
+## 3. Canvases
 
 ``` text
-1000×1500
-ratio 2:3
+FRONT logical canvas: 1000×1500, ratio 2:3
+BACK  logical canvas: 380×490,  ratio 38:49 (10 units = 1 mm)
+physical piece (keychain): 38 mm × 49 mm
 ```
+
+The BACK does not share the FRONT canvas or aspect ratio. BACK rules:
+`designs/back/README.md`. Print adaptation: `05-PRINT-LAYOUTS.md`.
 
 ## 4. Framework
 
@@ -102,6 +119,10 @@ Detailed player contract and Spotify Code geometry:
 → 02-PLAYER-CONTRACT.md
 ```
 
+Player V2 is the historical approved baseline. Player V3 is a REVIEW candidate (not approved,
+not locked); its status and the display-title exception are recorded in `02-PLAYER-CONTRACT.md`.
+In V3 the keychain FRONT omits the Spotify Code (it stays on the BACK).
+
 ## 6. Responsibility split
 
 ``` text
@@ -119,7 +140,7 @@ load declared assets
 render manifest
 application flow
 tests
-1000×1500 capture
+FRONT 1000×1500 capture (BACK: 380×490)
 report missing assets/conflicts
 ```
 
@@ -196,8 +217,8 @@ src/assets/wavekeeps/designs/front/<design-id>/
 For a new back design `<design-id>` create:
 
 ``` text
-documentation contract:
-designs/back/<design-id>.md
+documentation contract (after visual approval):
+designs/back/<design-id>/<design-id>.md
 
 runtime packet:
 src/assets/wavekeeps/designs/back/<design-id>/

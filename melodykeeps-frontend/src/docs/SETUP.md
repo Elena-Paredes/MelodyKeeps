@@ -63,7 +63,7 @@ Playwright tests (see `playwright.config.ts`).
 | Port 4200 in use | `ng serve --port 4300` |
 | Backend connection fails | Verify port in `api.config.ts`, check CORS on backend |
 | Token expires silently | Add refresh token logic (planned) |
-| QR code not rendering | Verify qrcode lib installed: `npm install qrcode` |
+| Spotify Code not rendering | Verify `src/assets/wavekeeps/designs/back/<id>/assets/svg/spotify-code.svg` exists |
 
 ## Code Style
 - TypeScript strict mode enabled
