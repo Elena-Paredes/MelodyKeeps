@@ -27,8 +27,8 @@ test.describe('MelodyKeeps E2E - Login y Reproductor', () => {
     const loginButton = page.locator('button:has-text("Login")').or(page.locator('button:has-text("Iniciar")'));
     await loginButton.click();
 
-    // Esperar redirección a home
-    await page.waitForURL(/\/home/, { timeout: 10000 });
+    // Esperar redirección a la pantalla de modo (Con diseño / Sin diseño)
+    await page.waitForURL(/\/modo/, { timeout: 10000 });
 
     // Verificar que el token se guardó
     const token = await page.evaluate(() => localStorage.getItem('mk_token'));
@@ -42,8 +42,8 @@ test.describe('MelodyKeeps E2E - Login y Reproductor', () => {
     await page.fill('input[type="password"]', 'Test@123456');
     await page.locator('button').first().click();
 
-    // Esperar a estar en home
-    await page.waitForURL(/\/home/, { timeout: 10000 });
+    // Esperar a estar en la pantalla de modo
+    await page.waitForURL(/\/modo/, { timeout: 10000 });
 
     // Navegar al reproductor
     await page.goto('http://localhost:4200/player-demo');

@@ -2,6 +2,7 @@ import { Component, signal, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
+import { jsPDF } from 'jspdf';
 import { SongsService, SongSearchResult } from '../../core/songs.service';
 import { DesignsService, DesignTemplate } from '../../core/designs.service';
 import { SpotifyService } from '../../core/spotify.service';
@@ -96,6 +97,7 @@ export class HomeComponent implements OnInit {
 
     const newDesign: MusicPlayerDesign = {
       title: song.title,
+      playerDisplayTitle: song.playerDisplayTitle,
       artist: song.artist,
       artworkUrl: song.coverUrl || 'https://i.scdn.co/image/ab67616d0000b27312345678901234567890abcd',
       spotifyLink: `spotify:track:${song.spotifyTrackId}`,
@@ -136,6 +138,7 @@ export class HomeComponent implements OnInit {
   generatePrintBatch(product: Product) {
     const designs = this.supportedSongs().map(song => ({
       title: song.title,
+      playerDisplayTitle: song.playerDisplayTitle,
       artist: song.artist,
       artworkUrl: song.coverUrl || 'https://i.scdn.co/image/ab67616d0000b27312345678901234567890abcd',
       spotifyLink: `spotify:track:${song.spotifyTrackId}`,
@@ -212,5 +215,83 @@ export class HomeComponent implements OnInit {
       printWindow.document.close();
       printWindow.print();
     }
+  }
+
+  async exportBatchToPdf() {
+    const batch = this.printAllLayouts();
+    if (!batch) return;
+
+    const product = batch.product;
+    const designs = batch.designs;
+
+    // PDF dimensions (Carta)
+    const pageWidth = 210; // mm (21.59 cm)
+    const pageHeight = 297; // mm (29.7 cm)
+
+    // Design dimensions based on product
+    let designWidth: number;
+    let designHeight: number;
+
+    if (product === 'keychain') {
+      designWidth = 38; // mm (3.8 cm - ancho)
+      designHeight = 49; // mm (4.9 cm - alto)
+    } else {
+      designWidth = 75; // mm (7.5 cm)
+      designHeight = 75; // mm (7.5 cm)
+    }
+
+    // Margins
+    const margin = 1; // mm (0.1 cm)
+    const gap = 5; // mm (0.5 cm spacing)
+
+    // Llaveros de 49 mm de alto: 6 filas no caben en A4 (295 mm útiles)
+    const cols = 4;
+    const rows = product === 'keychain' ? 5 : 6;
+    const itemsPerPage = cols * rows;
+
+    // Create PDF
+    const pdf = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: 'a4'
+    });
+
+    // Calculate centered positioning
+    const availableWidth = pageWidth - margin * 2;
+    const availableHeight = pageHeight - margin * 2;
+    const gridWidth = cols * designWidth + (cols - 1) * gap;
+    const gridHeight = rows * designHeight + (rows - 1) * gap;
+    const startX = margin + (availableWidth - gridWidth) / 2;
+    const startY = margin + (availableHeight - gridHeight) / 2;
+
+    for (let itemIndex = 0; itemIndex < itemsPerPage; itemIndex++) {
+      if (itemIndex > 0 && itemIndex % itemsPerPage === 0) {
+        pdf.addPage();
+      }
+
+      const rowInPage = Math.floor((itemIndex % itemsPerPage) / cols);
+      const colInPage = (itemIndex % itemsPerPage) % cols;
+
+      const x = startX + colInPage * (designWidth + gap);
+      const y = startY + rowInPage * (designHeight + gap);
+
+      // Cycle through designs (repeat lote for full page)
+      const design = designs[itemIndex % designs.length];
+
+      pdf.setLineWidth(0.5);
+      pdf.rect(x, y, designWidth, designHeight);
+
+      // Add text
+      pdf.setFontSize(6);
+      pdf.text(design.song.title, x + designWidth / 2, y + designHeight / 2 - 2, { align: 'center' });
+      pdf.setFontSize(4);
+      pdf.text(design.song.variantId || 'Purple', x + designWidth / 2, y + designHeight / 2 + 2, { align: 'center' });
+    }
+
+    // Save PDF
+    const filename = `wavekeeps-${product}-batch-${new Date().toISOString().slice(0, 10)}.pdf`;
+    pdf.save(filename);
+
+    console.log(`✓ PDF exported: ${filename}`);
   }
 }

@@ -1,5 +1,6 @@
 export interface MusicPlayerDesign {
   title: string;
+  playerDisplayTitle?: string;
   artist: string;
   artworkUrl: string;
   spotifyLink: string;
@@ -13,6 +14,9 @@ export interface MusicPlayerDesign {
   backDesignId?: string;
   variantId?: string;
   playlistLabel?: string;
+
+  theme?: 'light' | 'dark';
+  spotifyCodeUrl?: string;
 
   playbackState: "playing" | "paused";
 }

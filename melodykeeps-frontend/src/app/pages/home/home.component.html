@@ -197,9 +197,10 @@
 
         <button
           type="button"
+          (click)="exportBatchToPdf()"
           class="w-full rounded-xl bg-gradient-to-r from-accent to-violet text-white font-semibold py-3 shadow-md hover:opacity-90 transition"
         >
-          🖨️ Imprimir 12 {{ batch.product === 'keychain' ? 'Llaveros' : 'Stickers' }}
+          📄 Exportar PDF (12 {{ batch.product === 'keychain' ? 'Llaveros' : 'Stickers' }})
         </button>
       </section>
     }

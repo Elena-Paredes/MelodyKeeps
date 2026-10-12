@@ -2,6 +2,7 @@
 export interface WaveKeepsSong {
   id: string;
   title: string;
+  playerDisplayTitle?: string; // solo para el PLAYER; title es el título canónico
   artist: string;
   spotifyTrackId: string;
   quote: string;
@@ -104,6 +105,7 @@ export const SUPPORTED_SONGS: WaveKeepsSong[] = [
   {
     id: 'we-are-bulletproof',
     title: 'We Are Bulletproof: the Eternal Edition',
+    playerDisplayTitle: 'We Are Bulletproof',
     artist: 'BTS',
     spotifyTrackId: '133ocfbXXG4HTk76qgSeUb',
     quote: 'Éramos solo siete, pero ahora las tenemos a todas ustedes...',

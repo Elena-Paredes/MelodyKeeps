@@ -159,14 +159,14 @@ interface LayoutResult {
 })
 export class KeychainLayoutPlannerComponent implements OnInit {
   config: LayoutConfig = {
-    designWidth: 4.5,      // cm
-    designHeight: 1.77,    // cm
+    designWidth: 3.5,      // cm (ancho)
+    designHeight: 4.5,     // cm (alto)
     paperWidth: 21.59,     // carta: 8.5"
     paperHeight: 27.94,    // carta: 11"
-    marginX: 1.27,         // 0.5"
-    marginY: 1.27,         // 0.5"
-    spacingX: 0.75,        // cm
-    spacingY: 0.75,        // cm
+    marginX: 0.1,          // 0.1 cm (ajustado para caber 6 filas)
+    marginY: 0.1,          // 0.1 cm (ajustado para caber 6 filas)
+    spacingX: 0.5,         // cm
+    spacingY: 0.5,         // cm
   };
 
   result: LayoutResult = {

@@ -22,7 +22,7 @@ export class LoginComponent {
     this.loading.set(true);
     try {
       await this.auth.login(this.email(), this.password());
-      this.router.navigate(['/home']);
+      this.router.navigate(['/modo']);
     } catch (error: any) {
       this.error.set(error?.message || 'Correo o contraseña incorrectos.');
     } finally {

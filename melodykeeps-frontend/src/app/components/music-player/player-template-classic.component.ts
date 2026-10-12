@@ -5,6 +5,7 @@ import * as QRCode from 'qrcode';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { SUPPORTED_SONGS } from '../../data/supported-songs';
 
+// PLAYER V3 (REVIEW): legibility pass. V2 baseline = git HEAD, copia en _review/player-v3-legibility/player-template-classic.V2-baseline.ts.txt
 @Component({
   selector: 'app-player-template-classic',
   standalone: true,
@@ -19,6 +20,9 @@ import { SUPPORTED_SONGS } from '../../data/supported-songs';
         [style.height]="'auto'"
         [attr.data-testid]="'wavekeeps-player'"
       >
+      @if (design.theme === 'dark') {
+        <rect x="0" y="0" width="1000" height="1500" fill="#000000" />
+      }
       <!-- Header -->
       <g id="header">
         <!-- Chevron Down -->
@@ -68,14 +72,14 @@ import { SUPPORTED_SONGS } from '../../data/supported-songs';
       <!-- Album Artwork -->
       <defs>
         <clipPath id="artwork-clip">
-          <rect x="170" y="205" width="660" height="660" rx="28" ry="28" />
+          <rect x="155" y="200" width="690" height="690" rx="28" ry="28" />
         </clipPath>
       </defs>
       <image
-        x="170"
-        y="205"
-        width="660"
-        height="660"
+        x="155"
+        y="200"
+        width="690"
+        height="690"
         [attr.href]="design.artworkUrl"
         clip-path="url(#artwork-clip)"
         preserveAspectRatio="xMidYMid slice"
@@ -83,21 +87,21 @@ import { SUPPORTED_SONGS } from '../../data/supported-songs';
 
       <!-- Track Information -->
       <text
-        x="135"
-        y="930"
+        x="90"
+        y="955"
         font-family="Inter"
         font-weight="700"
-        font-size="43"
+        font-size="50"
         [attr.fill]="theme.text"
       >
-        {{ design.title }}
+        {{ design.playerDisplayTitle ?? design.title }}
       </text>
       <text
-        x="135"
-        y="980"
+        x="90"
+        y="1005"
         font-family="Inter"
         font-weight="400"
-        font-size="30"
+        font-size="35"
         [attr.fill]="theme.secondaryText"
       >
         {{ design.artist }}
@@ -105,73 +109,69 @@ import { SUPPORTED_SONGS } from '../../data/supported-songs';
 
       <!-- Heart Icon -->
       <path
-        [attr.d]="getHeartPath(835, 930)"
+        [attr.d]="getHeartPath(900, 955)"
         [attr.stroke]="theme.heart"
         stroke-width="3"
-        fill="#000000"
+        [attr.fill]="theme.heartFill"
         stroke-linecap="round"
         stroke-linejoin="round"
       />
 
-      <!-- Spotify Code (WaveKeeps: direct SVG reference to back design asset) -->
-      <image
-        x="250"
-        y="1070"
-        width="500"
-        height="125"
-        [attr.href]="'assets/wavekeeps/designs/back/' + (design.backDesignId || '') + '/assets/svg/spotify-code.svg'"
-        preserveAspectRatio="xMidYMid meet"
-      />
+      @if (design.spotifyCodeUrl) {
+        <image x="190" y="1040" width="620" height="155" [attr.href]="design.spotifyCodeUrl" preserveAspectRatio="xMidYMid meet" />
+      }
 
       <!-- Linear Progress Bar -->
-      <g id="linear-progress">
+      <g id="linear-progress" [attr.transform]="'translate(0 ' + dyProgress + ')'">
         <!-- Background track -->
         <line
-          x1="135"
-          y1="1225"
-          x2="865"
-          y2="1225"
-          [attr.stroke]="'#D7D7DE'"
-          stroke-width="5"
+          x1="80"
+          y1="1110"
+          x2="920"
+          y2="1110"
+          [attr.stroke]="theme.progressRemaining"
+          stroke-width="6"
           stroke-linecap="round"
         />
         <!-- Completed track -->
         <line
-          x1="135"
-          y1="1225"
+          x1="80"
+          y1="1110"
           [attr.x2]="getProgressX()"
-          y2="1225"
-          [attr.stroke]="'#111111'"
-          stroke-width="5"
+          y2="1110"
+          [attr.stroke]="theme.progressDone"
+          stroke-width="6"
           stroke-linecap="round"
         />
         <!-- Progress knob -->
         <circle
           [attr.cx]="getProgressX()"
-          cy="1225"
-          r="8"
-          [attr.fill]="'#111111'"
+          cy="1110"
+          r="9"
+          [attr.fill]="theme.progressDone"
         />
       </g>
 
       <!-- Time Labels -->
       <text
-        x="135"
-        y="1265"
+        x="80"
+        y="1150"
+        [attr.transform]="'translate(0 ' + dyProgress + ')'"
         font-family="Inter"
         font-weight="400"
-        font-size="25"
+        font-size="28"
         [attr.fill]="theme.text"
         text-anchor="start"
       >
         {{ formatTime(design.currentTimeSeconds) }}
       </text>
       <text
-        x="865"
-        y="1265"
+        x="920"
+        y="1150"
+        [attr.transform]="'translate(0 ' + dyProgress + ')'"
         font-family="Inter"
         font-weight="400"
-        font-size="25"
+        font-size="28"
         [attr.fill]="theme.text"
         text-anchor="end"
       >
@@ -179,9 +179,9 @@ import { SUPPORTED_SONGS } from '../../data/supported-songs';
       </text>
 
       <!-- Playback Controls -->
-      <g id="controls">
+      <g id="controls" [attr.transform]="'translate(0 ' + dyControls + ')'">
         <!-- Shuffle (nested SVG) -->
-        <svg x="127" y="1305" width="46" height="46" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
+        <svg x="75" y="1262" width="52" height="52" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
           <g fill="none" [attr.stroke]="theme.controlActive" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M16 3h5v5" />
             <path d="M4 20 21 3" />
@@ -190,32 +190,35 @@ import { SUPPORTED_SONGS } from '../../data/supported-songs';
             <path d="m4 4 5 5" />
           </g>
         </svg>
-        <circle cx="150" cy="1364" r="4" [attr.fill]="theme.controlActive" />
+        <circle cx="101" cy="1327" r="4" [attr.fill]="theme.controlActive" />
 
         <!-- Previous -->
         <path
-          [attr.d]="getPreviousIcon(330, 1328)"
+          [attr.d]="getPreviousIcon(340, 1288)"
+          transform="translate(340 1288) scale(1.12) translate(-340 -1288)"
           [attr.fill]="theme.text"
           stroke-width="0"
         />
 
         <!-- Play/Pause (Circle + Icon) -->
-        <circle cx="500" cy="1328" r="56" [attr.fill]="theme.text" />
+        <circle cx="500" cy="1288" r="62" [attr.fill]="theme.text" />
         <path
-          [attr.d]="design.playbackState === 'playing' ? getPauseIcon(500, 1328) : getPlayIcon(500, 1328)"
+          [attr.d]="design.playbackState === 'playing' ? getPauseIcon(500, 1288) : getPlayIcon(500, 1288)"
+          transform="translate(500 1288) scale(1.107) translate(-500 -1288)"
           [attr.fill]="getPlayPauseIconColor()"
           stroke-width="0"
         />
 
         <!-- Next -->
         <path
-          [attr.d]="getNextIcon(670, 1328)"
+          [attr.d]="getNextIcon(660, 1288)"
+          transform="translate(660 1288) scale(1.12) translate(-660 -1288)"
           [attr.fill]="theme.text"
           stroke-width="0"
         />
 
         <!-- Repeat (nested SVG) -->
-        <svg x="827" y="1305" width="46" height="46" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
+        <svg x="873" y="1262" width="52" height="52" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
           <g fill="none" [attr.stroke]="theme.controlActive" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="m17 1 4 4-4 4" />
             <path d="M3 11V9a4 4 0 0 1 4-4h14" />
@@ -223,12 +226,12 @@ import { SUPPORTED_SONGS } from '../../data/supported-songs';
             <path d="M21 13v2a4 4 0 0 1-4 4H3" />
           </g>
         </svg>
-        <circle cx="850" cy="1364" r="4" [attr.fill]="theme.controlActive" />
+        <circle cx="899" cy="1327" r="4" [attr.fill]="theme.controlActive" />
       </g>
 
       <!-- Bottom Utilities -->
       <!-- Device -->
-      <svg x="130" y="1412" width="40" height="40" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
+      <svg x="80" [attr.y]="1368 + dyControls" width="48" height="48" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
         <g fill="none" [attr.stroke]="theme.text" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="3" y="4" width="18" height="14" rx="2" />
           <path d="M8 22h8" />
@@ -236,7 +239,7 @@ import { SUPPORTED_SONGS } from '../../data/supported-songs';
         </g>
       </svg>
       <!-- Queue -->
-      <svg x="830" y="1412" width="40" height="40" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
+      <svg x="872" [attr.y]="1368 + dyControls" width="48" height="48" viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet">
         <g fill="none" [attr.stroke]="theme.text" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 6h12" />
           <path d="M3 12h12" />
@@ -254,14 +257,42 @@ import { SUPPORTED_SONGS } from '../../data/supported-songs';
 export class PlayerTemplateClassicComponent implements OnChanges {
   @Input() design!: MusicPlayerDesign;
 
-  readonly theme = {
+  private readonly lightTheme = {
     text: '#111111',
     secondaryText: '#66666F',
     heart: '#3A3A42',
+    heartFill: '#000000',
+    progressDone: '#111111',
+    progressRemaining: '#D7D7DE',
     accentStart: '#111111',
     accentEnd: '#111111',
     controlActive: '#20D760',
   };
+
+  private readonly darkTheme = {
+    text: '#FFFFFF',
+    secondaryText: '#B3B3B3',
+    heart: '#E63946',
+    heartFill: '#E63946',
+    progressDone: '#FFFFFF',
+    progressRemaining: '#4D4D4D',
+    accentStart: '#FFFFFF',
+    accentEnd: '#FFFFFF',
+    controlActive: '#20D760',
+  };
+
+  get theme() {
+    return this.design?.theme === 'dark' ? this.darkTheme : this.lightTheme;
+  }
+
+  // Con Spotify Code en el frente (sticker) la zona inferior baja para dejarle sitio.
+  get dyProgress(): number {
+    return this.design?.spotifyCodeUrl ? 115 : 0;
+  }
+
+  get dyControls(): number {
+    return this.design?.spotifyCodeUrl ? 40 : 0;
+  }
 
   constructor(private sanitizer: DomSanitizer) {}
 
@@ -311,22 +342,18 @@ export class PlayerTemplateClassicComponent implements OnChanges {
   }
 
   getHeartPath(cx: number, cy: number): string {
-    const size = 21.5;
-    return `
-      M ${cx - size} ${cy - size * 0.5}
-      C ${cx - size} ${cy - size * 1.2},
-        ${cx - size * 0.6} ${cy - size * 1.5},
-        ${cx} ${cy - size * 0.8}
-      C ${cx + size * 0.6} ${cy - size * 1.5},
-        ${cx + size} ${cy - size * 1.2},
-        ${cx + size} ${cy - size * 0.5}
-      C ${cx + size} ${cy + size * 0.3},
-        ${cx + size * 0.3} ${cy + size * 0.8},
-        ${cx} ${cy + size}
-      C ${cx - size * 0.3} ${cy + size * 0.8},
-        ${cx - size} ${cy + size * 0.3},
-        ${cx - size} ${cy - size * 0.5}
-    `;
+    // Corazón redondeado (forma "favorite" de Material, 20×18.35 en un viewBox de 24), escalado a
+    // ~48 unidades de ancho y centrado en (cx, cy).
+    const k = 2.41;
+    const p = (x: number, y: number) => `${(cx + (x - 12) * k).toFixed(2)} ${(cy + (y - 12.175) * k).toFixed(2)}`;
+    return `M ${p(12, 21.35)} L ${p(10.55, 20.03)}
+      C ${p(5.4, 15.36)} ${p(2, 12.28)} ${p(2, 8.5)}
+      C ${p(2, 5.42)} ${p(4.42, 3)} ${p(7.5, 3)}
+      C ${p(9.24, 3)} ${p(10.91, 3.81)} ${p(12, 5.09)}
+      C ${p(13.09, 3.81)} ${p(14.76, 3)} ${p(16.5, 3)}
+      C ${p(19.58, 3)} ${p(22, 5.42)} ${p(22, 8.5)}
+      C ${p(22, 12.28)} ${p(18.6, 15.36)} ${p(13.45, 20.04)}
+      L ${p(12, 21.35)} Z`;
   }
 
   getPlayIcon(cx: number, cy: number): string {
@@ -423,14 +450,14 @@ export class PlayerTemplateClassicComponent implements OnChanges {
   }
 
   getPlayPauseIconColor(): string {
-    return '#FFFFFF';
+    return this.design?.theme === 'dark' ? '#000000' : '#FFFFFF';
   }
 
   getProgressX(): number {
-    // ponytail: linear progress bar knob position, y=1225
+    // ponytail: linear progress bar knob position, y=1110
     const ratio = this.design.durationSeconds > 0
       ? Math.max(0, Math.min(1, this.design.currentTimeSeconds / this.design.durationSeconds))
       : 0;
-    return 135 + (730 * ratio);
+    return 80 + (840 * ratio);
   }
 }
