@@ -138,14 +138,20 @@
           @if (selectedSongData(); as song) {
             <div class="flex flex-col items-center">
               <p class="text-xs text-plum/60 mb-2">ATRÁS</p>
-              <div class="w-full max-w-sm bg-black rounded-2xl overflow-hidden shadow-lg">
-                <app-back-placeholder
-                  [title]="song.title"
-                  [artist]="song.artist"
-                  [quote]="song.quote"
-                  [qrDataUrl]="'/assets/wavekeeps/designs/back/' + song.backDesignId + '/assets/svg/spotify-code.svg'"
-                />
-              </div>
+              @if (song.backDesignReady) {
+                <div class="w-full max-w-sm bg-white rounded-2xl overflow-hidden shadow-lg">
+                  <app-back-design [song]="song" [showReservedZones]="true" />
+                </div>
+              } @else {
+                <div class="w-full max-w-sm bg-black rounded-2xl overflow-hidden shadow-lg">
+                  <app-back-placeholder
+                    [title]="song.title"
+                    [artist]="song.artist"
+                    [quote]="song.quote"
+                    [qrDataUrl]="'/assets/wavekeeps/designs/back/' + song.backDesignId + '/assets/svg/spotify-code.svg'"
+                  />
+                </div>
+              }
             </div>
           }
         </div>
@@ -170,38 +176,46 @@
     @if (printAllLayouts(); as batch) {
       <section class="rounded-3xl bg-gradient-to-br from-accent/10 to-violet/10 border-2 border-accent/30 shadow-lg shadow-accent/10 p-6">
         <h2 class="font-semibold text-plum mb-2">🖨️ Imprimir todos (12 diseños)</h2>
-        <p class="text-sm text-plum/60 mb-4">{{ batch.product === 'keychain' ? 'Llaveros' : 'Stickers' }} - Imprime una hoja con los 12 diseños</p>
+        <p class="text-sm text-plum/60 mb-4">{{ batch.product === 'keychain' ? 'Llaveros 3.8 × 4.9 cm' : 'Stickers 5.5 × 7.5 cm' }} - Los 12 diseños en orden, repetidos hasta llenar las hojas ({{ sheetTotal(batch) }} piezas)</p>
 
         <div class="bg-white rounded-2xl p-4 mb-4 overflow-hidden">
           <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
             @for (design of batch.designs; track design.song.id) {
-              <div style="
-                aspect-ratio: 2/3;
-                background: linear-gradient(135deg, #e8f4f8 0%, #c0e4f0 100%);
-                border: 1px solid #0066cc;
-                border-radius: 6px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                gap: 4px;
-                padding: 8px;
-                text-align: center;
-              ">
-                <div style="font-size: 10px; font-weight: bold; color: #0066cc;">{{ design.song.title }}</div>
-                <div style="font-size: 8px; color: #666;">{{ design.song.variantId || 'Purple' }}</div>
+              <div data-batch-front [attr.data-song-id]="design.song.id" style="position: relative; background: #fff; border: 1px solid #ddd; border-radius: 4px; overflow: hidden;">
+                <div style="position: absolute; inset: 0; pointer-events: none;">
+                  <app-wavekeeps-renderer [design]="design" />
+                </div>
+                <div style="position: relative;">
+                  <app-player-template-classic [design]="design" />
+                </div>
               </div>
             }
           </div>
+
+          @if (batch.product === 'keychain') {
+            <p class="text-xs text-plum/60 mt-4 mb-2">REVERSOS (van al dorso de cada llavero, en el mismo orden)</p>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
+              @for (design of batch.designs; track design.song.id) {
+                <div data-batch-back [attr.data-song-id]="design.song.id" style="background: #fff; border: 1px solid #ddd; border-radius: 4px; overflow: hidden;">
+                  <app-back-design [song]="design.song" />
+                </div>
+              }
+            </div>
+          }
         </div>
 
         <button
           type="button"
+          data-testid="export-pdf"
+          [disabled]="exporting()"
           (click)="exportBatchToPdf()"
-          class="w-full rounded-xl bg-gradient-to-r from-accent to-violet text-white font-semibold py-3 shadow-md hover:opacity-90 transition"
+          class="w-full rounded-xl bg-gradient-to-r from-accent to-violet text-white font-semibold py-3 shadow-md hover:opacity-90 transition disabled:opacity-50"
         >
-          📄 Exportar PDF (12 {{ batch.product === 'keychain' ? 'Llaveros' : 'Stickers' }})
+          {{ exporting() ? 'Generando PDF…' : '📄 Exportar PDF (' + sheetTotal(batch) + ' ' + (batch.product === 'keychain' ? 'llaveros: frente y reverso' : 'stickers') + ')' }}
         </button>
+        @if (exportError()) {
+          <p class="text-sm text-red-600 mt-2">{{ exportError() }}</p>
+        }
       </section>
     }
 

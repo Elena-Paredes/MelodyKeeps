@@ -23,6 +23,7 @@ export interface WaveKeepsManifest {
   status: string;
   implementationReady: boolean;
   canvas: { width: number; height: number };
+  palette?: { accent: string };
   elements: WaveKeepsElement[];
 }
 
@@ -53,6 +54,23 @@ export class WaveKeepsService {
       console.error('HTTP Error:', errMsg, err);
       throw new Error(`Failed to load manifest for ${designId} from ${path}: ${errMsg}`);
     }
+  }
+
+  private backCache = new Map<string, WaveKeepsManifest>();
+
+  async loadBackDesign(designId: string): Promise<WaveKeepsManifest> {
+    const hit = this.backCache.get(designId);
+    if (hit) return hit;
+    const path = `/assets/wavekeeps/designs/back/${designId}/manifest.json`;
+    const manifest = await firstValueFrom(this.http.get<WaveKeepsManifest>(path));
+    if (!manifest.implementationReady) throw new Error(`Back design ${designId} not ready for implementation`);
+    this.backCache.set(designId, manifest);
+    return manifest;
+  }
+
+  // Las plumas del reverso son las de la variante del frente ("variant:feathers/feather-03.png").
+  getBackAssetPath(src: string, variantId: string): string {
+    return `/assets/wavekeeps/designs/front/purple-feathers/assets/variants/${variantId}/${src.replace(/^variant:/, '')}`;
   }
 
   getAssetPath(designId: string, assetPath: string, variantId?: string): string {

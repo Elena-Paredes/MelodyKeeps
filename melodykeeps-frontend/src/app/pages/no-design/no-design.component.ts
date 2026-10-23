@@ -6,6 +6,7 @@ import { catchError, debounceTime, distinctUntilChanged, filter, switchMap, tap 
 import { SongsService, SongSearchResult } from '../../core/songs.service';
 import { PlayerTemplateClassicComponent } from '../../components/music-player/player-template-classic.component';
 import { MusicPlayerDesign } from '../../components/music-player/music-player.model';
+import { renderFrontCanvas, withPrintDpi } from '../../core/front-export';
 
 const FALLBACK_COVER = 'https://i.scdn.co/image/ab67616d0000b27312345678901234567890abcd';
 
@@ -15,66 +16,11 @@ const spotifyCodeUrl = (trackId: string) =>
 
 const trackIdFrom = (link: string) => /(?:track\/|track:)([A-Za-z0-9]+)/.exec(link)?.[1] ?? null;
 
-const INTER_CSS_URL = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap';
-
-// @font-face de Inter (latin y latin-ext, 400 y 700) con los archivos incrustados como data URL.
-async function inlineInterFontCss(): Promise<string> {
-  const css = await (await fetch(INTER_CSS_URL)).text();
-  const faces = [...css.matchAll(/\/\*\s*([\w-]+)\s*\*\/\s*(@font-face\s*\{[^}]*\})/g)].filter((m) => m[1] === 'latin' || m[1] === 'latin-ext');
-  const inlined = await Promise.all(
-    faces.map(async (m) => {
-      const url = /url\((https:[^)]+)\)/.exec(m[2])?.[1];
-      if (!url) return '';
-      return m[2].replace(url, await blobToDataUrl(await (await fetch(url)).blob()));
-    }),
-  );
-  return inlined.join('\n');
-}
 
 // Sticker de este modo: 5.5 cm de ancho × 7.5 cm de alto, exportado a 600 ppp.
 const STICKER_MM = { w: 55, h: 75 };
 const STICKER_RADIUS_MM = 2; // esquinas ligeramente redondeadas (transparentes en el PNG)
 const PRINT_DPI = 600;
-const mmToPx = (mm: number) => Math.round((mm / 25.4) * PRINT_DPI);
-
-const CRC_TABLE = (() => {
-  const t = new Uint32Array(256);
-  for (let n = 0; n < 256; n++) {
-    let c = n;
-    for (let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
-    t[n] = c >>> 0;
-  }
-  return t;
-})();
-const crc32 = (bytes: Uint8Array) => {
-  let c = 0xffffffff;
-  for (const b of bytes) c = CRC_TABLE[(c ^ b) & 0xff] ^ (c >>> 8);
-  return (c ^ 0xffffffff) >>> 0;
-};
-
-// Inserta el chunk pHYs (píxeles por metro) tras IHDR para que el PNG declare su tamaño físico.
-async function withPrintDpi(png: Blob, dpi: number): Promise<Blob> {
-  const src = new Uint8Array(await png.arrayBuffer());
-  const ppm = Math.round(dpi / 0.0254);
-  const chunk = new Uint8Array(21); // longitud(4) + tipo(4) + datos(9) + crc(4)
-  const v = new DataView(chunk.buffer);
-  v.setUint32(0, 9);
-  chunk.set([0x70, 0x48, 0x59, 0x73], 4); // "pHYs"
-  v.setUint32(8, ppm);
-  v.setUint32(12, ppm);
-  chunk[16] = 1; // unidad: metro
-  v.setUint32(17, crc32(chunk.subarray(4, 17)));
-  const ihdrEnd = 8 + 25; // firma + chunk IHDR completo
-  return new Blob([src.subarray(0, ihdrEnd), chunk, src.subarray(ihdrEnd)], { type: 'image/png' });
-}
-
-const blobToDataUrl = (blob: Blob) =>
-  new Promise<string>((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = () => reject(reader.error);
-    reader.readAsDataURL(blob);
-  });
 
 @Component({
   selector: 'app-no-design',
@@ -240,8 +186,7 @@ export class NoDesignComponent {
     this.submitted$.next(this.query().trim());
   }
 
-  // Descarga el frente como PNG de 5.5 × 7.5 cm a 600 ppp. Un SVG usado como imagen no carga recursos
-  // externos, así que la portada y el código de Spotify se incrustan antes de dibujarlo.
+  // Descarga el frente como PNG de 5.5 × 7.5 cm a 600 ppp (ver core/front-export.ts).
   async saveImage() {
     const d = this.design();
     const svg = this.frontBox?.nativeElement.querySelector('svg');
@@ -249,71 +194,13 @@ export class NoDesignComponent {
     this.saving.set(true);
     this.saveError.set(null);
     try {
-      const W = mmToPx(STICKER_MM.w);
-      const H = mmToPx(STICKER_MM.h);
-      const clone = svg.cloneNode(true) as SVGSVGElement;
-      clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-      clone.setAttribute('width', String(W));
-      clone.setAttribute('height', String(H));
-      clone.setAttribute('preserveAspectRatio', 'none'); // el diseño (2:3) se estira para llenar la pieza
-      clone.removeAttribute('style');
-      // El Spotify Code se dibuja aparte y sin estirar, para que siga escaneando.
-      const codeEl = clone.querySelector('image[href*="scannables"]');
-      const codeHref = codeEl?.getAttribute('href') ?? null;
-      codeEl?.remove();
-      clone.querySelectorAll('text').forEach((t) => t.setAttribute('font-family', 'Inter, Arial, Helvetica, sans-serif'));
-      const fontCss = await inlineInterFontCss().catch(() => ''); // sin fuente incrustada queda Arial
-      if (fontCss) {
-        const style = document.createElementNS('http://www.w3.org/2000/svg', 'style');
-        style.textContent = fontCss;
-        clone.insertBefore(style, clone.firstChild);
-      }
-      await Promise.all(
-        [...clone.querySelectorAll('image')].map(async (img) => {
-          const href = img.getAttribute('href');
-          if (!href || href.startsWith('data:')) return;
-          const res = await fetch(href);
-          if (!res.ok) throw new Error(`${res.status} ${href}`);
-          img.setAttribute('href', await blobToDataUrl(await res.blob()));
-        }),
-      );
-
-      const url = URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(clone)], { type: 'image/svg+xml' }));
-      const image = new Image();
-      image.src = url;
-      await image.decode();
-      const canvas = document.createElement('canvas');
-      canvas.width = W;
-      canvas.height = H;
-      const ctx = canvas.getContext('2d')!;
-      const r = mmToPx(STICKER_RADIUS_MM);
-      ctx.beginPath();
-      ctx.moveTo(r, 0);
-      ctx.arcTo(W, 0, W, H, r);
-      ctx.arcTo(W, H, 0, H, r);
-      ctx.arcTo(0, H, 0, 0, r);
-      ctx.arcTo(0, 0, W, 0, r);
-      ctx.closePath();
-      ctx.clip(); // todo lo que se dibuje después queda recortado a la pieza redondeada
-      ctx.fillStyle = '#000000';
-      ctx.fillRect(0, 0, W, H);
-      ctx.drawImage(image, 0, 0, W, H);
-      // La fuente incrustada puede decodificarse tras el primer dibujo: se espera y se repinta.
-      await new Promise((r) => setTimeout(r, 200));
-      ctx.fillRect(0, 0, W, H);
-      ctx.drawImage(image, 0, 0, W, H);
-      URL.revokeObjectURL(url);
-
-      if (codeHref) {
-        const res = await fetch(codeHref);
-        if (!res.ok) throw new Error(`${res.status} ${codeHref}`);
-        const codeImg = new Image();
-        codeImg.src = await blobToDataUrl(await res.blob());
-        await codeImg.decode();
-        const w = (620 * W) / 1000; // mismo ancho y centro que en la vista previa, proporción 4:1 exacta
-        ctx.drawImage(codeImg, (W - w) / 2, (1117.5 * H) / 1500 - w / 8, w, w / 4);
-      }
-
+      const canvas = await renderFrontCanvas([svg], d.spotifyCodeUrl ?? null, {
+        widthMm: STICKER_MM.w,
+        heightMm: STICKER_MM.h,
+        dpi: PRINT_DPI,
+        radiusMm: STICKER_RADIUS_MM,
+        background: '#000000',
+      });
       const raw = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/png'));
       if (!raw) throw new Error('toBlob devolvió null');
       const png = await withPrintDpi(raw, PRINT_DPI);

@@ -108,6 +108,9 @@ The 12 existing Spotify Codes remain the authority.
 It is the priority functional element of the BACK. All decoration adapts around it.
 Scan-ability is never sacrificed to preserve decoration.
 
+Color (owner decision, 2026-10-23): the code stays black on white (original asset), not tinted with
+the variant color, so scanning stays safe. Everything else on the BACK takes the variant color.
+
 Prohibited:
 
 ```text
@@ -141,15 +144,21 @@ stays pure white.
 
 ## 6. BACK decorative language
 
-The BACK does NOT visually reuse FRONT Feathers + Threads V2. Front feathers stay exclusive to
-the FRONT, and their silhouettes are not copied.
+FRONT Threads are NOT reused on the BACK.
 
-Approved language:
+Owner decision (2026-10-23), which supersedes the earlier "no front feathers on the BACK" rule:
+the BACK reuses the FRONT feather PNGs of the song's variant (same colors; no new palette),
+arranged more abundantly and clipped by the canvas edges. Source files:
+`designs/front/purple-feathers/assets/variants/<variantId>/feathers/`. In the manifest they are
+referenced as `variant:feathers/feather-NN.png`. New, chubbier watercolor feathers delivered by
+Chat remain a possible future replacement.
+
+Approved language (target):
 
 ```text
 large watercolor/stamped "7"
 +
-new stylized watercolor feathers (thicker, chubbier, more stylized)
+watercolor feathers (variant colors)
 ```
 
 - Several feathers enter partially from the canvas edges ("peeking in"); clipping at the edges
@@ -157,14 +166,17 @@ new stylized watercolor feathers (thicker, chubbier, more stylized)
 - The watercolor "7" is a recurring identity element of the collection: upper-left region,
   partially clipped / entering from the edge. It may be used on all 12 songs and varies in
   color by variant. Its exact geometry is NOT approved yet.
-- Small BTS logo in the upper region: centered, subtle, secondary to the Spotify Code. Exact
-  geometry pending the Spring Day master design.
+- Small BTS logo in the upper-LEFT corner (owner decision, 2026-10-23; the earlier "centered" note
+  is superseded): subtle, secondary to the Spotify Code, in the variant color. Until the official
+  file arrives it is drawn as a vector approximation (ring + two trapezoids + "BTS"), modeled on
+  the owner's mockup. Geometry pending the Spring Day approval.
 
 ## 7. CTA, quote and footer
 
 - CTA text (approved): `ESCANEA Y ESCUCHA`. Typography and geometry pending Spring Day.
-- Quote: dynamic, song-specific content. The owner will confirm the final phrases; the texts
-  currently in `supported-songs.ts` are NOT declared final.
+- Quote: dynamic, song-specific content (the `quote` field of each song in `supported-songs.ts`).
+  The 12 phrases were confirmed by the owner on 2026-10-23. All fit in at most 4 lines at the
+  provisional size (widest line 264 of 270 units).
 - Footer: `SONG TITLE ONLY`. Never `• BTS`, `BTS` or the artist next to the footer title.
 - The footer title has a reserved region inside the composition. The quote must NOT
   automatically use all space down to y = 460. Final geometry of quote region, divider/sparkle
@@ -202,6 +214,44 @@ The first BACK to design is Spring Day (`variantId = ynwa`). It defines the BACK
 GEOMETRY: PENDING VISUAL APPROVAL. After approval, that geometry is reused for the other songs,
 changing only variant/color family, Spotify Code, quote, song title, and any other dynamic
 content explicitly approved. The other 11 are NOT designed until Spring Day is approved.
+
+Update (2026-10-23): at the owner's request the Spring Day geometry was replicated PROVISIONALLY to
+the other 11 songs (one `manifest.json` per song under `designs/back/<id>/`, same 19 feather
+placements, own accent color from the variant). All 12 are still pending visual approval, and the
+the 7 space is still empty (asset from Chat) and the BTS logo is a vector approximation. Songs that share a variant share its colors
+(DNA, Dimple and Pied Piper use `her`; Swim and Like Animals use `arirang-red`).
+
+### Prototype state (2026-10-23, NOT approved)
+
+Implemented as a prototype: `app-back-design` (component) + `designs/back/spring-day/manifest.json`
+(status `PROTOTYPE_PENDING_VISUAL_APPROVAL`, 19 feathers). Decisions taken by the owner:
+
+```text
+decoration:   FRONT feathers of the variant (reused), more abundant
+7:            delivered by Chat; space RESERVED at the top center, not drawn
+                x=100 y=6 w=160 h=106
+BTS logo:     drawn as a vector approximation, top-left, variant color
+                ring (44,20) r=12 + two trapezoids x=28.1 y=40 w=31.7 h=50 + "BTS" y=106 size 12
+Spotify Code: black on white, original asset, never recolored
+quote:        confirmed by the owner (2026-10-23), 12 of 12
+```
+
+Provisional layout values (all subject to the Spring Day approval):
+
+```text
+CTA     "ESCANEA Y ESCUCHA"  y=252  size 12  bold  letter-spacing 3   accent color
+quote   centered x=190  first baseline y=282  line height 23  size 17 italic  max width 270
+divider two lines (x 92-172, 208-288) + 4-point sparkle at (190, 392)   accent color
+title   y=424  size 14  bold  letter-spacing 2.5  accent color  (SONG TITLE ONLY)
+        a long title is split into centered lines (max width 250); We Are Bulletproof uses the
+        short footer title `backDisplayTitle` = "We Are Bulletproof: the Eternal" (per the mockup)
+accent  from the variant feathers (Spring Day: #137aaf), darkened for legibility
+```
+
+Feather exclusion zones (checked numerically on the rotated feather boxes): none inside the
+Spotify Code zone with its quiet zone (y 116.25-237.75), the BTS logo (top-left), the reserved 7 space, the CTA,
+the quote or the footer. Feathers live in the top-right corner, along the left/right edges below
+the code, and in the bottom corners.
 
 ## 11. Per-design contracts
 

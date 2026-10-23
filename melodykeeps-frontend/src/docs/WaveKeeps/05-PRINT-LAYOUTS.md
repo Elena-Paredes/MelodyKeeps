@@ -57,8 +57,14 @@ Este documento no la duplica. Aquí solo importa cómo se imprime:
 - El reverso se compone en 380 × 490 y se coloca en la pieza de 38 × 49 mm **sin estirarse**
   (10 unidades = 1 mm).
 - El reverso de prueba (`10-spring-day-reverso.png`: código + frase) fue solo un prototipo para
-  validar la proporción y el tamaño del código. **No define** la geometría de la frase ni del
-  resto de elementos; esa se decide con el prototipo de Spring Day.
+  validar la proporción y el tamaño del código. La geometría del reverso vive en
+  `designs/back/README.md` y en los `manifest.json` de cada canción (prototipo pendiente de
+  aprobación visual).
+- **PDF del lote de llaveros (frente y reverso):** por cada hoja de frentes (20 piezas) viene una
+  hoja de reversos justo después (pág. 1 frentes, pág. 2 reversos). Se imprime a doble cara,
+  volteando por el borde largo: en la hoja de reversos cada pieza va en la columna opuesta
+  (espejo horizontal) para quedar justo detrás de su frente. El orden de las piezas es el mismo
+  en las dos hojas. Los stickers no llevan reverso en el lote.
 
 ## 3. Sticker — 55 × 75 mm (vertical)
 
@@ -71,7 +77,7 @@ Este documento no la duplica. Aquí solo importa cómo se imprime:
 | Frente | captura 1000×1500 estirada ×1.10 en horizontal |
 | Spotify Code en el frente | **SÍ** (a diferencia del llavero) |
 | Reverso | no definido todavía |
-| Hoja de prueba | una pieza en x=15 mm, y=15 mm; cuadrícula por lote sin definir |
+| Hoja del lote | A4, margen 1 mm, 5 mm entre piezas: 3 columnas × 3 filas = 9 por hoja. Las hojas se llenan completas: 12 diseños = 2 hojas = 18 piezas (los 12 en orden y luego los primeros 6) |
 
 ### Frente con código (lienzo 1000 × 1500)
 
@@ -103,10 +109,10 @@ reducida a 630, se descartó: la lentitud fue por iluminación, no por tamaño).
 | Tema | Estado |
 |---|---|
 | `home.component.ts`: llavero 38×49 mm, 5 filas | aplicado |
-| `home.component.ts`: sticker | **sigue en 75×75 mm** y cuadrícula 4×6 (no refleja 55×75) |
-| Botón "Exportar PDF" de la app | dibuja rectángulos con el título, **sin imágenes** |
-| Generador de PDF con frente y reverso | no existe versionado; las pruebas se hicieron con scripts temporales (captura Playwright + jsPDF) |
-| Spotify Code en el frente del sticker | solo en la prueba; el player de la app no lo muestra |
+| `home.component.ts`: llavero 38×49 y sticker 55×75 | aplicado; la cuadrícula se calcula con la medida real |
+| Botón "Exportar PDF" de la app (lote de 12) | aplicado: dibuja los 12 frentes reales (decoración + player) a la medida de la pieza, con línea de corte. Las hojas se llenan completas repitiendo los diseños en el orden del catálogo: llavero 20 piezas en 1 hoja (12 + los 8 primeros), sticker 18 piezas en 2 hojas (12 + los 6 primeros) |
+| Render del frente a imagen | `core/front-export.ts` (compartido por el lote y por "Sin diseño"); el PDF del llavero lleva frente y reverso (2 páginas por hoja, reverso en espejo); el del sticker solo frentes. Los reversos usan los 12 manifests provisionales, sin el 7 ni el logo BTS (pendientes de Chat) |
+| Spotify Code en el frente del sticker | aplicado en el lote de stickers (código local de cada canción, sin estirar); el llavero no lo lleva |
 | Componente `back-placeholder` de la app | no refleja el lienzo 380 × 490 ni la geometría del Spotify Code (runtime sin cambios) |
 | Reverso del llavero (decoración) | pendiente: prototipo Spring Day, ver `designs/back/README.md` |
 | Reverso del sticker | por definir |

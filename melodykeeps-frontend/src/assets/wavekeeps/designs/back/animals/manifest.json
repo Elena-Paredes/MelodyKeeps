@@ -1,0 +1,29 @@
+{
+  "designId": "animals",
+  "side": "back",
+  "status": "PROTOTYPE_PENDING_VISUAL_APPROVAL",
+  "implementationReady": true,
+  "canvas": { "width": 380, "height": 490 },
+  "palette": {"accent":"#b40e1b","source":"tono dominante de las plumas de la variante arirang-red, oscurecido para legibilidad"},
+  "elements": [
+    { "id": "bf-01", "type": "png", "src": "variant:feathers/feather-03.png", "x": 310.93, "y": -0.68, "width": 60, "height": 89.4, "rotationDeg": 22, "opacity": 1, "zIndex": 1 },
+    { "id": "bf-02", "type": "png", "src": "variant:feathers/feather-01.png", "x": 329.89, "y": 20.38, "width": 54, "height": 91.64, "rotationDeg": -8, "opacity": 1, "zIndex": 2 },
+    { "id": "bf-03", "type": "png", "src": "variant:feathers/feather-02.png", "x": 311.77, "y": -29.61, "width": 44, "height": 75.3, "rotationDeg": 30, "opacity": 1, "zIndex": 3 },
+    { "id": "bf-04", "type": "png", "src": "variant:feathers/feather-05.png", "x": 365.84, "y": -16.45, "width": 34, "height": 57.61, "rotationDeg": 55, "opacity": 1, "zIndex": 1 },
+    { "id": "bf-05", "type": "png", "src": "variant:feathers/feather-08.png", "x": 274.37, "y": 74.64, "width": 24, "height": 37.18, "rotationDeg": -20, "opacity": 1, "zIndex": 2 },
+    { "id": "bf-06", "type": "png", "src": "variant:feathers/feather-01.png", "x": 2.01, "y": 237.79, "width": 50, "height": 84.85, "rotationDeg": 14, "opacity": 1, "zIndex": 3 },
+    { "id": "bf-07", "type": "png", "src": "variant:feathers/feather-04.png", "x": -28.05, "y": 325.28, "width": 54, "height": 80.05, "rotationDeg": -18, "opacity": 1, "zIndex": 1 },
+    { "id": "bf-08", "type": "png", "src": "variant:feathers/feather-02.png", "x": 5.69, "y": 376.72, "width": 46, "height": 78.72, "rotationDeg": 12, "opacity": 1, "zIndex": 2 },
+    { "id": "bf-09", "type": "png", "src": "variant:feathers/feather-07.png", "x": 30.28, "y": 300.84, "width": 22, "height": 37.91, "rotationDeg": 15, "opacity": 1, "zIndex": 3 },
+    { "id": "bf-10", "type": "png", "src": "variant:feathers/feather-09.png", "x": 20.9, "y": 374.47, "width": 20, "height": 31.91, "rotationDeg": -12, "opacity": 1, "zIndex": 1 },
+    { "id": "bf-11", "type": "png", "src": "variant:feathers/feather-03.png", "x": 329.59, "y": 259.61, "width": 56, "height": 83.44, "rotationDeg": -16, "opacity": 1, "zIndex": 2 },
+    { "id": "bf-12", "type": "png", "src": "variant:feathers/feather-01.png", "x": 354.06, "y": 302.04, "width": 52, "height": 88.24, "rotationDeg": 10, "opacity": 1, "zIndex": 3 },
+    { "id": "bf-13", "type": "png", "src": "variant:feathers/feather-05.png", "x": 334.76, "y": 394.07, "width": 40, "height": 67.78, "rotationDeg": -22, "opacity": 1, "zIndex": 1 },
+    { "id": "bf-14", "type": "png", "src": "variant:feathers/feather-08.png", "x": 326.95, "y": 303.78, "width": 24, "height": 37.18, "rotationDeg": -10, "opacity": 1, "zIndex": 2 },
+    { "id": "bf-15", "type": "png", "src": "variant:feathers/feather-11.png", "x": 337.39, "y": 366.83, "width": 20, "height": 31.71, "rotationDeg": 18, "opacity": 1, "zIndex": 3 },
+    { "id": "bf-16", "type": "png", "src": "variant:feathers/feather-01.png", "x": 85.07, "y": 435.44, "width": 56, "height": 95.03, "rotationDeg": 70, "opacity": 1, "zIndex": 1 },
+    { "id": "bf-17", "type": "png", "src": "variant:feathers/feather-02.png", "x": 281.24, "y": 484.86, "width": 50, "height": 85.57, "rotationDeg": -70, "opacity": 1, "zIndex": 2 },
+    { "id": "bf-18", "type": "png", "src": "variant:feathers/feather-09.png", "x": 124.73, "y": 461.66, "width": 22, "height": 35.11, "rotationDeg": 70, "opacity": 1, "zIndex": 3 },
+    { "id": "bf-19", "type": "png", "src": "variant:feathers/feather-10.png", "x": 249.33, "y": 486.38, "width": 22, "height": 32.77, "rotationDeg": -75, "opacity": 1, "zIndex": 1 }
+  ]
+}
