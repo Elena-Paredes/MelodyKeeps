@@ -3,6 +3,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ModeSelectComponent } from './pages/mode-select/mode-select.component';
 import { NoDesignComponent } from './pages/no-design/no-design.component';
+import { PolaroidComponent } from './pages/polaroid/polaroid.component';
 import { PlayerDemoComponent } from './components/music-player/player-demo.component';
 import { DemoMultipleComponent } from './components/music-player/demo-multiple.component';
 import { KeychainLayoutPlannerComponent } from './components/keychain-layout-planner.component';
@@ -13,6 +14,7 @@ export const routes: Routes = [
   { path: 'modo', component: ModeSelectComponent },
   { path: 'home', component: HomeComponent },
   { path: 'sin-diseno', component: NoDesignComponent },
+  { path: 'polaroid', component: PolaroidComponent },
   { path: 'player-demo', component: PlayerDemoComponent },
   { path: 'demo-multiple', component: DemoMultipleComponent },
   { path: 'keychain-planner', component: KeychainLayoutPlannerComponent },

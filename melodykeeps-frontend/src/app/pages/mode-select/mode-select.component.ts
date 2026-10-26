@@ -34,6 +34,17 @@ import { Router } from '@angular/router';
           <h2 class="font-semibold text-plum mt-2">Sin diseño</h2>
           <p class="text-xs text-plum/60 mt-1">Busca cualquier canción en Spotify: sticker con fondo negro, solo frente.</p>
         </button>
+
+        <button
+          type=button
+          data-testid=mode-polaroid
+          (click)="go('/polaroid')"
+          class="rounded-3xl bg-white/80 backdrop-blur-sm shadow-lg shadow-violet/10 p-6 text-left border-2 border-transparent hover:border-accent transition"
+        >
+          <span class="text-2xl">📷</span>
+          <h2 class="font-semibold text-plum mt-2">Polaroid</h2>
+          <p class="text-xs text-plum/60 mt-1">Sube tus fotos: cada una lleva abajo el código de la canción que elijas (5.5 x 6.5 cm).</p>
+        </button>
       </div>
     </main>
   `,

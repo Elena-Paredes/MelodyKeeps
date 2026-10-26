@@ -176,7 +176,7 @@
     @if (printAllLayouts(); as batch) {
       <section class="rounded-3xl bg-gradient-to-br from-accent/10 to-violet/10 border-2 border-accent/30 shadow-lg shadow-accent/10 p-6">
         <h2 class="font-semibold text-plum mb-2">🖨️ Imprimir todos (12 diseños)</h2>
-        <p class="text-sm text-plum/60 mb-4">{{ batch.product === 'keychain' ? 'Llaveros 3.8 × 4.9 cm' : 'Stickers 5.5 × 7.5 cm' }} - Los 12 diseños en orden, repetidos hasta llenar las hojas ({{ sheetTotal(batch) }} piezas)</p>
+        <p class="text-sm text-plum/60 mb-4">{{ batch.product === 'keychain' ? 'Llaveros 3.8 × 4.9 cm' : 'Stickers 5.5 × 7 cm' }} - Los 12 diseños en orden, repetidos hasta llenar las hojas ({{ sheetTotal(batch) }} piezas)</p>
 
         <div class="bg-white rounded-2xl p-4 mb-4 overflow-hidden">
           <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">

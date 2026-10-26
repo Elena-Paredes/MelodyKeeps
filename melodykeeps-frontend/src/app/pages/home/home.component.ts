@@ -35,19 +35,37 @@ const PRODUCT_TEMPLATE: Record<Product, DesignTemplate> = {
 
 const PRINT_DPI = 600;
 
-// Medida física de cada pieza (mm): llavero 3.8 × 4.9 cm, sticker 5.5 × 7.5 cm.
-const pieceMm = (product: Product) => (product === 'keychain' ? { w: 38, h: 49 } : { w: 55, h: 75 });
+// Medida física de cada pieza (mm): llavero 3.8 × 4.9 cm, sticker 5.5 × 7 cm (ancho × alto).
+const pieceMm = (product: Product) => (product === 'keychain' ? { w: 38, h: 49 } : { w: 55, h: 70 });
 
-// A4, margen 1 mm y 5 mm entre piezas; cuántas caben lo decide la medida real de la pieza
-// (llavero 4×5 = 20 por hoja, sticker 3×3 = 9 por hoja). Las hojas se llenan completas: los
-// diseños se repiten en el mismo orden del catálogo hasta cubrir todas las posiciones.
-const SHEET = { width: 210, height: 297, margin: 1, gap: 5 };
+// Hoja A4 del lote, por producto (mm). Las hojas se llenan completas: los diseños se repiten en el
+// mismo orden del catálogo hasta cubrir todas las posiciones.
+//  - llavero: hoja en vertical con 5 columnas × 5 filas (quitando separación y padding a los lados
+//    caben 5 columnas: 5 × 38 + 4 × 3 = 202 mm). Se usan 24 posiciones (los 12 diseños dos veces) y la
+//    última queda libre. Márgenes: 4 mm a los lados y 16 mm arriba y abajo.
+//  - sticker: hoja en vertical, 3 por fila × 4 filas = 12 por hoja = los 12 diseños en UNA hoja.
+//    Alto: 4 × 70 + 3 × 3 = 289 mm (4 mm de margen arriba y abajo); ancho: 3 × 55 + 2 × 5 = 175 mm.
+const SHEET_LAYOUT = {
+  keychain: { landscape: false, cols: 5, rows: 5, count: 24, gapX: 3, gapY: 5 },
+  sticker: { landscape: false, cols: 3, rows: 4, count: 12, gapX: 5, gapY: 3 },
+};
 const sheetPlan = (product: Product, designs: number) => {
   const { w, h } = pieceMm(product);
-  const cols = Math.floor((SHEET.width - SHEET.margin * 2 + SHEET.gap) / (w + SHEET.gap));
-  const rows = Math.floor((SHEET.height - SHEET.margin * 2 + SHEET.gap) / (h + SHEET.gap));
-  const perPage = cols * rows;
-  return { w, h, cols, rows, perPage, total: Math.ceil(designs / perPage) * perPage };
+  const layout = SHEET_LAYOUT[product === 'keychain' ? 'keychain' : 'sticker'];
+  const pageW = layout.landscape ? 297 : 210;
+  const pageH = layout.landscape ? 210 : 297;
+  const perPage = layout.count;
+  const gridW = layout.cols * w + (layout.cols - 1) * layout.gapX;
+  const gridH = layout.rows * h + (layout.rows - 1) * layout.gapY;
+  return {
+    w,
+    h,
+    ...layout,
+    perPage,
+    total: Math.ceil(designs / perPage) * perPage,
+    startX: (pageW - gridW) / 2,
+    startY: (pageH - gridH) / 2,
+  };
 };
 
 @Component({
@@ -59,7 +77,7 @@ const sheetPlan = (product: Product, designs: number) => {
 export class HomeComponent implements OnInit {
   readonly products: { id: Product; label: string; size: string; icon: string }[] = [
     { id: 'keychain', label: 'Llavero', size: '3.8 x 4.9 cm', icon: '🔑' },
-    { id: 'sticker', label: 'Sticker', size: '5.5 x 7.5 cm', icon: '⭐' },
+    { id: 'sticker', label: 'Sticker', size: '5.5 x 7 cm', icon: '⭐' },
   ];
 
 
@@ -316,19 +334,15 @@ export class HomeComponent implements OnInit {
     try {
       const images = await this.renderBatchImages();
       const backs = batch.product === 'keychain' ? await this.renderBatchBackImages() : [];
-      const { w, h, cols, perPage, total } = sheetPlan(batch.product, images.length);
-      const { width, height, margin, gap } = SHEET;
-      const rows = perPage / cols;
-      const startX = margin + (width - margin * 2 - (cols * w + (cols - 1) * gap)) / 2;
-      const startY = margin + (height - margin * 2 - (rows * h + (rows - 1) * gap)) / 2;
+      const { w, h, cols, perPage, total, gapX, gapY, startX, startY, landscape } = sheetPlan(batch.product, images.length);
 
-      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-      // `mirror`: el reverso se imprime a doble cara (voltear por el borde largo), así que cada
-      // pieza va en la columna opuesta para quedar justo detrás de su frente.
+      const pdf = new jsPDF({ orientation: landscape ? 'landscape' : 'portrait', unit: 'mm', format: 'a4' });
+      // `mirror`: el reverso se imprime a doble cara, así que cada pieza va en la columna opuesta
+      // (espejo horizontal) para quedar justo detrás de su frente.
       const place = (dataUrl: string, k: number, mirror: boolean) => {
         const col = mirror ? cols - 1 - (k % cols) : k % cols;
-        const x = startX + col * (w + gap);
-        const y = startY + Math.floor(k / cols) * (h + gap);
+        const x = startX + col * (w + gapX);
+        const y = startY + Math.floor(k / cols) * (h + gapY);
         pdf.addImage(dataUrl, 'PNG', x, y, w, h, undefined, 'FAST');
         pdf.setLineWidth(0.2);
         pdf.setDrawColor(150);
